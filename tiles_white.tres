@@ -1,0 +1,37 @@
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://vhlnh2xjqlly"]
+
+[ext_resource type="Texture2D" uid="uid://dx6ei45h3r3sk" path="res://tileset.png" id="1_op2b5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vonw3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0b4ue"]
+texture = ExtResource("1_op2b5")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, -8, -8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -4, 6, -4, 6, -3, 1, -3, 1, -2, 0, -2, 0, 2, 1, 2, 1, 3, 6, 3, 6, 4, 8, 4)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(5, 8, 5, -8, 8, -8, 8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(5, 8, 8, 8, 8, -8, 5, -8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, 6, -7, 6, -7, 5, -6, 5, -6, 1, -5, 1, -5, 0, 5, 0, 5, 1, 6, 1, 6, 5, 7, 5, 7, 6, 8, 6, 8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, 6, -7, 6, -7, 5, -6, 5, -6, 3, -5, 3, -5, 2, 5, 2, 5, 3, 6, 3, 6, 5, 7, 5, 7, 6, 8, 6, 8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, 6, -7, 6, -7, 5, -6, 5, -6, 4, -5, 4, -5, 3, 5, 3, 5, 4, 6, 4, 6, 5, 7, 5, 7, 6, 8, 6, 8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, 6, -7, 6, -7, 5, -6, 5, -6, 4, -5, 4, -5, 3, 5, 3, 5, 4, 6, 4, 6, 5, 7, 5, 7, 6, 8, 6, 8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -4, 6, -4, 6, -3, 1, -3, 1, -2, 0, -2, 0, 2, 1, 2, 1, 3, 6, 3, 6, 4, 8, 4)
+
+[resource]
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_vonw3")
+sources/0 = SubResource("TileSetAtlasSource_0b4ue")
