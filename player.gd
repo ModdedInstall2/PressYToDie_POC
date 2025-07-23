@@ -81,6 +81,7 @@ func _physics_process(delta: float) -> void:
 				sprite.play(&"idle")
 	
 	elif dead:
+		rotation = 0
 		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 		collision_mask = 2
 		sprite.play(&"die")
@@ -97,6 +98,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.y = move_toward(velocity.y, 0, SPEED)
+		
+		move_and_slide()
 	
 	if Input.is_action_just_pressed("y"):
 		await get_tree().create_timer(0.05).timeout
