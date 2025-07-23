@@ -122,6 +122,4 @@ light_mask = 0
 visibility_layer = 0
 scale = Vector2(-1e+10, -1e+10)
 
-[node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D"]
-
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
