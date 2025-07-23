@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 		motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 		collision_mask = 1
 		
+		print(rc.get_collider())
 		if rc.get_collider() == $level/white:
 			dead = true
 		
@@ -66,9 +67,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		if is_on_floor():
 			dash = 0
-		if not sprite.is_playing():
-			sprite.play(&"idle")
-		
+		if not sprite.is_playing() or sprite.animation == &"die":
+			if not dead:
+				sprite.play(&"idle")
+	
 	elif dead:
 		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 		collision_mask = 2
@@ -117,4 +119,3 @@ func _physics_process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	dead = false
-	$AnimatedSprite2D.play(&"idle")
