@@ -109,10 +109,8 @@ script = ExtResource("1_onrkg")
 sprite_frames = SubResource("SpriteFrames_n7ghd")
 animation = &"die"
 
-[node name="Collision" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_nvl01")
-
-[node name="JumpDir" type="RayCast2D" parent="CharacterBody2D/Collision"]
 
 [node name="Timer" type="Timer" parent="CharacterBody2D"]
 wait_time = 10.0

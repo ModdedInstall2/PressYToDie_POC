@@ -6,6 +6,7 @@ var doubleJump = 0
 var slope = 0
 var dash := 0
 var dead = false
+var jumpedOffSlope = 0
 
 func _physics_process(delta: float) -> void:
 	var sprite = get_node("AnimatedSprite2D")
@@ -15,7 +16,7 @@ func _physics_process(delta: float) -> void:
 		collision_mask = 1
 		
 		if not is_on_floor():
-			velocity += get_gravity() * delta
+			velocity += get_gravity() * delta - $Collision/JumpDir.get_collision_normal()
 		
 		if is_on_floor():
 			rotation = get_floor_normal().angle() + PI/2
@@ -37,31 +38,71 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("a") and (is_on_floor() or doubleJump == 0):
 			velocity.y = JUMP_VELOCITY
 			if get_floor_normal().x < 0 and get_floor_normal().y != -1:
-				velocity.x = SPEED * get_floor_normal().x * 2
+				jumpedOffSlope = -1
 			elif get_floor_normal().x > 0 and get_floor_normal().y != -1:
-				velocity.x = -SPEED * get_floor_normal().x * 2
+				jumpedOffSlope = 1
 			if not is_on_floor():
 				doubleJump = 1
 			for i in range(3):
 				await get_tree().process_frame
 			sprite.play(&"jump", 0.6)
 		
+		#if jumpedOffSlope == 1:
+		#	for i in range(5):
+		#		velocity.x -= JUMP_VELOCITY * 0.5
+		#	jumpedOffSlope = 0
+		#elif jumpedOffSlope == -1:
+		#	for i in range(5):
+		#		velocity.x += JUMP_VELOCITY * 0.5
+		#	jumpedOffSlope = 0
+		
 		var direction := Input.get_axis("left", "right")
 		var yDirection := Input.get_axis("down", "up")
+		var dashDirection
+		if 0.5 <= direction && direction <= 1:
+			if 0.5 <= yDirection && yDirection <= 1:
+				dashDirection = 0.25
+			elif -0.5 >= yDirection && yDirection >= -1:
+				dashDirection = 0.75
+			else:
+				dashDirection = 0.5
+		elif -0.5 >= direction && direction >= -1:
+			if 0.5 <= yDirection && yDirection <= 1:
+				dashDirection = -0.25
+			elif -0.5 >= yDirection && yDirection >= -1:
+				dashDirection = -0.75
+			else:
+				dashDirection = -0.5
+		elif 0.5 <= yDirection && yDirection <= 1:
+			dashDirection = -1
+		elif -0.5 >= yDirection && yDirection >= -1:
+			dashDirection = 1
 		if direction or yDirection:
 			if direction < 0:
 				sprite.set_flip_h(1)
 			else:
 				sprite.set_flip_h(0)
 			if Input.is_action_just_pressed("b") and dash == 0:
-				if direction > 1 or direction < -1:
-					velocity.x = direction * -JUMP_VELOCITY * 0.85
-				else:
-					velocity.x = direction * -JUMP_VELOCITY * 1.5
-				if yDirection < 1 or yDirection > -1:
-					velocity.y += yDirection * JUMP_VELOCITY * 0.85
-				else:
-					velocity.y = yDirection * JUMP_VELOCITY * 1.5
+				if dashDirection == 0.25:
+					velocity.x = 0.6375 * -JUMP_VELOCITY
+					velocity.y = 0.6375 * JUMP_VELOCITY
+				elif dashDirection == 0.5:
+					velocity.x = -JUMP_VELOCITY * 0.85
+				elif dashDirection == 0.75:
+					velocity.x = 0.6375 * -JUMP_VELOCITY
+					velocity.y = 0.6375 * -JUMP_VELOCITY
+				elif dashDirection == 1:
+					velocity.y = 0.85 * -JUMP_VELOCITY
+				elif dashDirection == -0.25:
+					velocity.x = 0.6375 * JUMP_VELOCITY
+					velocity.y = 0.6375 * JUMP_VELOCITY
+				elif dashDirection == -0.5:
+					velocity.x = 0.85 * JUMP_VELOCITY
+				elif dashDirection == -0.75:
+					velocity.x = 0.6375 * JUMP_VELOCITY
+					velocity.y = 0.6375 * -JUMP_VELOCITY
+				elif dashDirection == -1:
+					velocity.y = 0.85 * JUMP_VELOCITY
 				sprite.play(&"dash", 0.6)
 				dash = 1
 			else:
@@ -79,6 +120,8 @@ func _physics_process(delta: float) -> void:
 		if not sprite.is_playing() or sprite.animation == &"die":
 			if not dead:
 				sprite.play(&"idle")
+		print(direction)
+		print(yDirection)
 	
 	elif dead:
 		rotation = 0
@@ -108,6 +151,7 @@ func _physics_process(delta: float) -> void:
 			$Timer.start(10.0)
 		else:
 			$Timer.start(0.05)
+	
 
 func _on_timer_timeout() -> void:
 	dead = false
