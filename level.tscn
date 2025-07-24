@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://caohi1ntwjsxe"]
 
 [ext_resource type="TileSet" uid="uid://c2eg33y437rex" path="res://tiles.tres" id="1_vonw3"]
-[ext_resource type="Script" path="res://button.gd" id="2_0b4ue"]
+[ext_resource type="Script" uid="uid://guxqolwmghsa" path="res://button.gd" id="2_0b4ue"]
 [ext_resource type="Texture2D" uid="uid://dkjc82nplw7h1" path="res://connections.png" id="2_oi3di"]
 [ext_resource type="TileSet" uid="uid://vhlnh2xjqlly" path="res://tiles_white.tres" id="3_0b4ue"]
 
@@ -15,7 +15,6 @@ texture = ExtResource("2_oi3di")
 sources/0 = SubResource("TileSetAtlasSource_1ainy")
 
 [node name="level" type="Node2D"]
-scale = Vector2(2.5, 2.5)
 
 [node name="connections" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAMAAYAAAAAAAAAAAASAAYAAAAAAAAAAAAMAAUAAAACAAAAAAASAAUAAAACAAAAAAANAAUAAAABAAAAAAATAAUAAAABAAAAAAA=")

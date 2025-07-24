@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
-[ext_resource type="Script" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://b2b5lxdq0n6ir" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://caohi1ntwjsxe" path="res://level.tscn" id="3_i3pqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
@@ -107,7 +107,7 @@ script = ExtResource("1_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_n7ghd")
-animation = &"die"
+animation = &"idle"
 
 [node name="Collision" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_nvl01")

@@ -8,6 +8,7 @@
 
 [node name="level" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(-10, -1)
+scale = Vector2(2.7, 2.7)
 
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(32, 455)
