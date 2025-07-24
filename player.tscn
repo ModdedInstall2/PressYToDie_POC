@@ -1,8 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dh7a2y0b121b7"]
+[gd_scene load_steps=18 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b2b5lxdq0n6ir" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://caohi1ntwjsxe" path="res://level.tscn" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://c4divri036g2t" path="res://sfx/walk.wav" id="4_hqtel"]
+[ext_resource type="AudioStream" uid="uid://r0q4u1x48edh" path="res://sfx/jump.wav" id="5_sweqy"]
+[ext_resource type="AudioStream" uid="uid://b3v82xn5dnsg7" path="res://sfx/dash.wav" id="6_2hs0m"]
+[ext_resource type="AudioStream" uid="uid://cvxq0e5clwl7b" path="res://sfx/die.wav" id="7_1jxqw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -107,7 +111,7 @@ script = ExtResource("1_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_n7ghd")
-animation = &"idle"
+animation = &"walk"
 
 [node name="Collision" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_nvl01")
@@ -125,5 +129,26 @@ visibility_layer = 0
 scale = Vector2(-1e+10, -1e+10)
 
 [node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D"]
+
+[node name="sfx" type="Node2D" parent="CharacterBody2D"]
+
+[node name="walk" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
+stream = ExtResource("4_hqtel")
+playback_type = 1
+
+[node name="jump" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
+stream = ExtResource("5_sweqy")
+volume_db = -20.0
+
+[node name="dash" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
+stream = ExtResource("6_2hs0m")
+volume_db = -10.0
+
+[node name="die" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
+stream = ExtResource("7_1jxqw")
+pitch_scale = 1.62
+
+[node name="live" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
+stream = ExtResource("7_1jxqw")
 
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]

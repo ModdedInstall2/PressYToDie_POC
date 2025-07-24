@@ -45,6 +45,8 @@ func _physics_process(delta: float) -> void:
 				doubleJump = 1
 			for i in range(3):
 				await get_tree().process_frame
+			if (not $sfx/jump.is_playing()) or doubleJump == 1:
+				$sfx/jump.play()
 			sprite.play(&"jump", 0.6)
 		
 		#if jumpedOffSlope == 1:
@@ -105,14 +107,18 @@ func _physics_process(delta: float) -> void:
 					velocity.y = 0.85 * JUMP_VELOCITY
 				sprite.play(&"dash", 0.6)
 				dash = 1
+				$sfx/dash.play()
 			else:
 				velocity.x = direction * SPEED
 				if is_on_floor() and direction:
 					sprite.play(&"walk", 1.5)
+					if not $sfx/walk.is_playing():
+						$sfx/walk.play()
 					dash = 0
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			if sprite.animation == &"walk":
+				$sfx/walk.stop()
 				sprite.stop()
 		move_and_slide()
 		if is_on_floor():
@@ -147,9 +153,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("y"):
 		await get_tree().create_timer(0.05).timeout
 		if not dead:
+			$sfx/die.play()
 			dead = true
 			$Timer.start(10.0)
 		else:
+			$sfx/live.play()
 			$Timer.start(0.05)
 	
 
@@ -159,3 +167,4 @@ func _on_timer_timeout() -> void:
 	position.x += 1
 	if currentPos == position:
 		Input.action_press("y")
+	position = currentPos
