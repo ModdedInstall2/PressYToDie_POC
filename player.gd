@@ -88,23 +88,23 @@ func _physics_process(delta: float) -> void:
 				sprite.set_flip_h(0)
 			if Input.is_action_just_pressed("b") and dash == 0:
 				if dashDirection == 0.25:
-					velocity.x = 0.95 * -JUMP_VELOCITY
-					velocity.y = 0.95 * JUMP_VELOCITY
+					velocity.x = -JUMP_VELOCITY
+					velocity.y = JUMP_VELOCITY
 				elif dashDirection == 0.5:
 					velocity.x = 1.25 * -JUMP_VELOCITY
 				elif dashDirection == 0.75:
-					velocity.x = 0.95 * -JUMP_VELOCITY
-					velocity.y = 0.95 * -JUMP_VELOCITY
+					velocity.x = -JUMP_VELOCITY
+					velocity.y = -JUMP_VELOCITY
 				elif dashDirection == 1:
 					velocity.y = 1.25 * -JUMP_VELOCITY
 				elif dashDirection == -0.25:
-					velocity.x = 0.95 * JUMP_VELOCITY
-					velocity.y = 0.95 * JUMP_VELOCITY
+					velocity.x = JUMP_VELOCITY
+					velocity.y = JUMP_VELOCITY
 				elif dashDirection == -0.5:
 					velocity.x = 1.25 * JUMP_VELOCITY
 				elif dashDirection == -0.75:
-					velocity.x = 0.95 * JUMP_VELOCITY
-					velocity.y = 0.95 * -JUMP_VELOCITY
+					velocity.x = JUMP_VELOCITY
+					velocity.y = -JUMP_VELOCITY
 				elif dashDirection == -1:
 					velocity.y = 1.25 * JUMP_VELOCITY
 				sprite.play(&"dash", 0.6)

@@ -37,23 +37,25 @@ tile_set = ExtResource("1_vonw3")
 tile_map_data = PackedByteArray("AAANAAYAAAAAAAIAAAANAAUAAAABAAIAAAATAAYAAAAAAAIAAAATAAUAAAABAAIAAAA=")
 tile_set = ExtResource("1_vonw3")
 
-[node name="button" type="TileMapLayer" parent="."]
+[node name="btns" type="Node2D" parent="."]
+
+[node name="button" type="TileMapLayer" parent="btns"]
 tile_map_data = PackedByteArray("AAAMAAYAAAACAAIAAAASAAYAAAAAAAMAAAANAAQAAAACAAEAAAATAAQAAAACAAEAAAA=")
 tile_set = ExtResource("1_vonw3")
 
-[node name="permaTriggers" type="Node2D" parent="button"]
+[node name="permaTriggers" type="Node2D" parent="btns"]
 
-[node name="1" type="Area2D" parent="button/permaTriggers"]
+[node name="1" type="Area2D" parent="btns/permaTriggers"]
 collision_mask = 4
 
-[node name="1" type="CollisionShape2D" parent="button/permaTriggers/1"]
+[node name="1" type="CollisionShape2D" parent="btns/permaTriggers/1"]
 position = Vector2(199.996, 104.252)
 shape = SubResource("RectangleShape2D_0b4ue")
 
-[node name="tempTriggers" type="Node2D" parent="button"]
+[node name="tempTriggers" type="Node2D" parent="btns"]
 
-[node name="1" type="Area2D" parent="button/tempTriggers"]
+[node name="1" type="Area2D" parent="btns/tempTriggers"]
 
-[node name="1" type="CollisionShape2D" parent="button/tempTriggers/1"]
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/1"]
 position = Vector2(296, 106.249)
 shape = SubResource("RectangleShape2D_0b4ue")
