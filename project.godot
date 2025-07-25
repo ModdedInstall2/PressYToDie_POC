@@ -26,6 +26,7 @@ window/vsync/vsync_mode=2
 [editor]
 
 movie_writer/movie_file="E:/ModdedInstall2/Documents/PressYToDie_POC/movie.avi"
+movie_writer/disable_vsync=true
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
