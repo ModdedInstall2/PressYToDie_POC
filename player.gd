@@ -13,7 +13,9 @@ func _physics_process(delta: float) -> void:
 	
 	if not dead:
 		motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
-		collision_mask = 1
+		set_collision_mask_value(1, true)
+		set_collision_mask_value(2, false)
+		set_collision_mask_value(3, true)
 		
 		if not is_on_floor():
 			velocity += get_gravity() * delta - $Collision/JumpDir.get_collision_normal()
@@ -132,7 +134,9 @@ func _physics_process(delta: float) -> void:
 	elif dead:
 		rotation = 0
 		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
-		collision_mask = 2
+		set_collision_mask_value(1, false)
+		set_collision_mask_value(2, true)
+		set_collision_mask_value(3, true)
 		sprite.play(&"die")
 		
 		var direction := Input.get_axis("left", "right")

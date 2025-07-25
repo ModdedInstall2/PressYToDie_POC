@@ -44,6 +44,7 @@ tile_set = ExtResource("1_vonw3")
 [node name="permaTriggers" type="Node2D" parent="button"]
 
 [node name="1" type="Area2D" parent="button/permaTriggers"]
+collision_mask = 4
 
 [node name="1" type="CollisionShape2D" parent="button/permaTriggers/1"]
 position = Vector2(199.996, 104.252)
