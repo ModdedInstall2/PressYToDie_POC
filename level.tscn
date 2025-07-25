@@ -45,17 +45,17 @@ tile_set = ExtResource("1_vonw3")
 
 [node name="permaTriggers" type="Node2D" parent="btns"]
 
-[node name="1" type="Area2D" parent="btns/permaTriggers"]
+[node name="0" type="Area2D" parent="btns/permaTriggers"]
 collision_mask = 4
 
-[node name="1" type="CollisionShape2D" parent="btns/permaTriggers/1"]
+[node name="1" type="CollisionShape2D" parent="btns/permaTriggers/0"]
 position = Vector2(199.996, 104.252)
 shape = SubResource("RectangleShape2D_0b4ue")
 
 [node name="tempTriggers" type="Node2D" parent="btns"]
 
-[node name="1" type="Area2D" parent="btns/tempTriggers"]
+[node name="0" type="Area2D" parent="btns/tempTriggers"]
 
-[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/1"]
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/0"]
 position = Vector2(296, 106.249)
 shape = SubResource("RectangleShape2D_0b4ue")
