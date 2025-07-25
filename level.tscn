@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://caohi1ntwjsxe"]
+[gd_scene load_steps=9 format=4 uid="uid://caohi1ntwjsxe"]
 
 [ext_resource type="Script" uid="uid://bmjltkm4g74w3" path="res://level.gd" id="1_0b4ue"]
 [ext_resource type="TileSet" uid="uid://c2eg33y437rex" path="res://tiles.tres" id="1_vonw3"]
 [ext_resource type="Texture2D" uid="uid://dkjc82nplw7h1" path="res://connections.png" id="2_oi3di"]
 [ext_resource type="TileSet" uid="uid://vhlnh2xjqlly" path="res://tiles_white.tres" id="3_0b4ue"]
+[ext_resource type="AudioStream" uid="uid://cu7s6mwxng62g" path="res://sfx/button.wav" id="5_f2txt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ainy"]
 texture = ExtResource("2_oi3di")
@@ -59,3 +60,6 @@ shape = SubResource("RectangleShape2D_0b4ue")
 [node name="1" type="CollisionShape2D" parent="btns/tempTriggers/0"]
 position = Vector2(296, 106.249)
 shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="click" type="AudioStreamPlayer2D" parent="btns"]
+stream = ExtResource("5_f2txt")

@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 		var door := Array(permaDoors[i])
 		if currentBtn.get_overlapping_bodies() != []:
 			if permaButtons[i] == 0:
+				$btns/click.play()
 				$btns/button.set_cell(permaCells[i], 0, Vector2i(1, 3))
 				$btns/button.set_cell(permaLights[i], 0, Vector2i(1, 1))
 				$door.set_cell(door[0], 0, Vector2i(3, 0))
