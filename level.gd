@@ -26,6 +26,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# Buttons.
 	for i in range(len(permaButtons)):
 		var currentBtn := get_node("btns/permaTriggers/" + str(i))
 		var door := Array(permaDoors[i])
@@ -42,7 +43,6 @@ func _process(delta: float) -> void:
 	for i in range(len(tempButtons)):
 		var currentBtn := get_node("btns/tempTriggers/" + str(i))
 		var door := Array(tempDoors[i])
-		print(currentBtn.get_overlapping_bodies())
 		if currentBtn.get_overlapping_bodies() != []:
 			if tempButtons[i] == 0:
 				$btns/click.play()
@@ -63,3 +63,6 @@ func _process(delta: float) -> void:
 				$door.set_cell(door[0], 0, Vector2i(1, 2))
 				$door.set_cell(door[1], 0, Vector2i(0, 2))
 				tempButtons[i] = 0
+	
+	# Water.
+	print($water.get_overlapping_areas())

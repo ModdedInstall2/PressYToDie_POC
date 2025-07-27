@@ -152,4 +152,11 @@ pitch_scale = 1.62
 [node name="live" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("7_1jxqw")
 
+[node name="PlayerArea" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 9
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerArea"]
+shape = SubResource("CapsuleShape2D_nvl01")
+
 [connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
