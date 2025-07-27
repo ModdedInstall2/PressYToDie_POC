@@ -7,6 +7,7 @@ var slope = 0
 var dash := 0
 var dead = false
 var jumpedOffSlope = 0
+var really_dead := false
 
 func _physics_process(delta: float) -> void:
 	var sprite = get_node("AnimatedSprite2D")
@@ -37,9 +38,9 @@ func _physics_process(delta: float) -> void:
 			set_floor_max_angle(0.785398)
 		apply_floor_snap()
 		
-		if Input.is_action_just_pressed("a") and (is_on_floor() or doubleJump == 0 
-			or str($PlayerArea.get_overlapping_areas()) == "[water:<Area2D#34376517180>]"):
-			if str($PlayerArea.get_overlapping_areas()) == "[water:<Area2D#34376517180>]":
+		if Input.is_action_just_pressed("a") and (is_on_floor() or doubleJump == 0 \
+			or str($PlayerArea.get_overlapping_areas()).contains("water")):
+			if str($PlayerArea.get_overlapping_areas()).contains("water"):
 				velocity.y = 0.25 * JUMP_VELOCITY
 			else:
 				velocity.y = JUMP_VELOCITY
@@ -91,27 +92,27 @@ func _physics_process(delta: float) -> void:
 			else:
 				sprite.set_flip_h(0)
 			if Input.is_action_just_pressed("b") and dash == 0:
-				if str($PlayerArea.get_overlapping_areas()) == "[water:<Area2D#34376517180>]":
+				if str($PlayerArea.get_overlapping_areas()).contains("water"):
 					if dashDirection == 0.25:
-						velocity.x = -JUMP_VELOCITY * 0.35
-						velocity.y = JUMP_VELOCITY * 0.35
+						velocity.x = -JUMP_VELOCITY * 0.4
+						velocity.y = JUMP_VELOCITY * 0.4
 					elif dashDirection == 0.5:
-						velocity.x = 1.25 * -JUMP_VELOCITY * 0.35
+						velocity.x = 1.25 * -JUMP_VELOCITY * 0.4
 					elif dashDirection == 0.75:
-						velocity.x = -JUMP_VELOCITY * 0.35
-						velocity.y = -JUMP_VELOCITY * 0.35
+						velocity.x = -JUMP_VELOCITY * 0.4
+						velocity.y = -JUMP_VELOCITY * 0.4
 					elif dashDirection == 1:
-						velocity.y = 1.25 * -JUMP_VELOCITY * 0.35
+						velocity.y = 1.25 * -JUMP_VELOCITY * 0.4
 					elif dashDirection == -0.25:
-						velocity.x = JUMP_VELOCITY * 0.35
-						velocity.y = JUMP_VELOCITY * 0.35
+						velocity.x = JUMP_VELOCITY * 0.4
+						velocity.y = JUMP_VELOCITY * 0.4
 					elif dashDirection == -0.5:
-						velocity.x = 1.25 * JUMP_VELOCITY * 0.35
+						velocity.x = 1.25 * JUMP_VELOCITY * 0.4
 					elif dashDirection == -0.75:
-						velocity.x = JUMP_VELOCITY * 0.35
-						velocity.y = -JUMP_VELOCITY * 0.35
+						velocity.x = JUMP_VELOCITY * 0.4
+						velocity.y = -JUMP_VELOCITY * 0.4
 					elif dashDirection == -1:
-						velocity.y = 1.25 * JUMP_VELOCITY * 0.35
+						velocity.y = 1.25 * JUMP_VELOCITY * 0.4
 				else:
 					if dashDirection == 0.25:
 						velocity.x = -JUMP_VELOCITY
@@ -137,7 +138,7 @@ func _physics_process(delta: float) -> void:
 				dash = 1
 				$sfx/dash.play()
 			else:
-				if str($PlayerArea.get_overlapping_areas()) == "[water:<Area2D#34376517180>]":
+				if str($PlayerArea.get_overlapping_areas()).contains("water"):
 					velocity.x = direction * SPEED * 0.25
 				else:
 					velocity.x = direction * SPEED
@@ -185,20 +186,27 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("y"):
 		await get_tree().create_timer(0.05).timeout
-		if not dead:
-			$sfx/die.play()
-			dead = true
-			$Timer.start(10.0)
+		if str($PlayerArea.get_overlapping_areas()).contains("water"):
+			if not dead:
+				$"sfx/really-die".play()
+				really_dead = true
+				$AnimatedSprite2D.play(&"really_die")
+				await get_tree().create_timer(1).timeout
+				
+			else:
+				$sfx/live.play()
+				$DeathTimer.start(0.05)
 		else:
-			$sfx/live.play()
-			$Timer.start(0.05)
+			if not dead:
+				$sfx/die.play()
+				dead = true
+				$DeathTimer.start(10.0)
+			else:
+				$sfx/live.play()
+				$DeathTimer.start(0.05)
 	
 	print($PlayerArea.get_overlapping_areas())
 
 func _on_timer_timeout() -> void:
 	dead = false
-	var currentPos = position
-	position.x += 1
-	if currentPos == position:
-		Input.action_press("y")
-	position = currentPos
+	
