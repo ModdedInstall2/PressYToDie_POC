@@ -2,15 +2,18 @@ extends CharacterBody2D
 
 const SPEED = 250.0
 const JUMP_VELOCITY = -400.0
-var doubleJump = 0
-var slope = 0
-var dash := 0
-var dead = false
-var jumpedOffSlope = 0
-var really_dead := false
+@onready var doubleJump = 0
+@onready var slope = 0
+@onready var dash := 0
+@export var dead = false
+@onready var jumpedOffSlope = 0
+@onready var really_dead := false
+@export var sprite : Node
+
+func _ready() -> void:
+	sprite = get_node("AnimatedSprite2D")
 
 func _physics_process(delta: float) -> void:
-	var sprite = get_node("AnimatedSprite2D")
 	
 	if not dead:
 		motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
@@ -158,8 +161,6 @@ func _physics_process(delta: float) -> void:
 		if not sprite.is_playing() or sprite.animation == &"die":
 			if not dead:
 				sprite.play(&"idle")
-		print(direction)
-		print(yDirection)
 	
 	elif dead:
 		rotation = 0
@@ -205,7 +206,6 @@ func _physics_process(delta: float) -> void:
 				$sfx/live.play()
 				$DeathTimer.start(0.05)
 	
-	print($PlayerArea.get_overlapping_areas())
 
 func _on_timer_timeout() -> void:
 	dead = false

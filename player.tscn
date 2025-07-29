@@ -1,9 +1,9 @@
 [gd_scene load_steps=35 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://c325hj2e4vlso" path="res://player_main.gd" id="1_b26j0"]
 [ext_resource type="Script" uid="uid://b2b5lxdq0n6ir" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dncqmfo2crfeb" path="res://player-really-dying.png" id="3_dw050"]
-[ext_resource type="PackedScene" uid="uid://caohi1ntwjsxe" path="res://level.tscn" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://c4divri036g2t" path="res://sfx/walk.wav" id="4_hqtel"]
 [ext_resource type="AudioStream" uid="uid://r0q4u1x48edh" path="res://sfx/jump.wav" id="5_sweqy"]
 [ext_resource type="AudioStream" uid="uid://b3v82xn5dnsg7" path="res://sfx/dash.wav" id="6_2hs0m"]
@@ -226,9 +226,10 @@ animations = [{
 radius = 7.0
 height = 28.0
 
-[node name="player" type="Node2D"]
+[node name="player" type="Node2D" groups=["Persist"]]
+script = ExtResource("1_b26j0")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Death"]]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 5
 script = ExtResource("1_onrkg")
 
@@ -244,12 +245,6 @@ shape = SubResource("CapsuleShape2D_nvl01")
 [node name="DeathTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 10.0
 one_shot = true
-
-[node name="level" parent="CharacterBody2D" instance=ExtResource("3_i3pqv")]
-visible = false
-light_mask = 0
-visibility_layer = 0
-scale = Vector2(-1e+10, -1e+10)
 
 [node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D"]
 
