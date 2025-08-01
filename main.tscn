@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://caohi1ntwjsxe" path="res://level.tscn" id="2_0xm2m"]
 [ext_resource type="AudioStream" uid="uid://dlv80pwlt60nm" path="res://Fallen Down - Toby Fox.ogg" id="3_h2yge"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_1bvp3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -18,3 +18,18 @@ scale = Vector2(2.7, 2.7)
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(113, 514)
 scale = Vector2(2.5, 2.5)
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="hud"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="hud/Control"]
+custom_minimum_size = Vector2(9.22337e+18, 9.22337e+18)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0)

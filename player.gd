@@ -9,6 +9,7 @@ const JUMP_VELOCITY = -400.0
 @onready var jumpedOffSlope = 0
 @onready var really_dead := false
 @export var sprite : Node
+@onready var main_node = get_parent().get_parent()
 
 func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")
@@ -189,11 +190,7 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(0.05).timeout
 		if str($PlayerArea.get_overlapping_areas()).contains("water"):
 			if not dead:
-				$"sfx/really-die".play()
-				really_dead = true
-				$AnimatedSprite2D.play(&"really_die")
-				await get_tree().create_timer(1).timeout
-				
+				really_die()
 			else:
 				$sfx/live.play()
 				$DeathTimer.start(0.05)
@@ -218,4 +215,12 @@ func _physics_process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	dead = false
-	
+
+func really_die():
+	$"sfx/really-die".play()
+	$AnimatedSprite2D.play(&"really_die")
+	await $AnimatedSprite2D.animation_finished
+	get_node("././hud/Control/ColorRect").set_modulate(lerp(get_modulate(), Color(0, 0, 0, 255), 0.2))
+	main_node.load_game()
+	await get_tree().create_timer(0.5).timeout
+	get_node("././hud/Control/ColorRect").set_modulate(lerp(get_modulate(), Color(0, 0, 0, 0), 0.2))
