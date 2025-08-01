@@ -206,6 +206,15 @@ func _physics_process(delta: float) -> void:
 				$sfx/live.play()
 				$DeathTimer.start(0.05)
 	
+	#var currentLevel = str($PlayerArea.get_overlapping_areas())
+	#if currentLevel.contains("lvl0"):
+	#	$Camera2D.limit_left = 0
+	#	$Camera2D.limit_top = 0
+	#	$Camera2D.limit_bottom = 450
+	#	$Camera2D.limit_right = 1050
+	#
+	#print(get_viewport().get_mouse_position())
+	print(str($PlayerArea.get_overlapping_areas()))
 
 func _on_timer_timeout() -> void:
 	dead = false

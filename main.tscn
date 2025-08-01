@@ -1,25 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bro3nwk2rxw57"]
+[gd_scene load_steps=5 format=3 uid="uid://bro3nwk2rxw57"]
 
 [ext_resource type="Script" uid="uid://vgnlfhehq7yw" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dh7a2y0b121b7" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://caohi1ntwjsxe" path="res://level.tscn" id="2_0xm2m"]
 [ext_resource type="AudioStream" uid="uid://dlv80pwlt60nm" path="res://Fallen Down - Toby Fox.ogg" id="3_h2yge"]
-[ext_resource type="Script" uid="uid://bitm63rvx8yvn" path="res://level_data.gd" id="4_7mycd"]
-[ext_resource type="Script" uid="uid://cpyvg1j2a43kt" path="res://player_data.gd" id="5_lquwl"]
-
-[sub_resource type="Resource" id="Resource_272bh"]
-script = ExtResource("4_7mycd")
-name = "Default"
-button_map = null
-door_map = null
-metadata/_custom_type_script = "uid://bitm63rvx8yvn"
-
-[sub_resource type="Resource" id="Resource_7mycd"]
-script = ExtResource("5_lquwl")
-name = "Default"
-position = null
-rotation = null
-metadata/_custom_type_script = "uid://cpyvg1j2a43kt"
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
@@ -30,9 +14,7 @@ parameters/looping = true
 
 [node name="level" parent="." instance=ExtResource("2_0xm2m")]
 scale = Vector2(2.7, 2.7)
-data = SubResource("Resource_272bh")
 
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(113, 514)
 scale = Vector2(2.5, 2.5)
-data = SubResource("Resource_7mycd")

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var data:PlayerData = PlayerData.new()
+@export var player_data:PlayerData = PlayerData.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,10 +8,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if "position" in data:
-		data.position = $CharacterBody2D.position
-	if "rotation" in data:
-		data.rotation = $CharacterBody2D/AnimatedSprite2D.flip_h
+	if "position" in player_data:
+		player_data.position = $CharacterBody2D.position
+	if "rotation" in player_data:
+		player_data.rotation = $CharacterBody2D/AnimatedSprite2D.flip_h
 
 func savegame():
 	var data = {
@@ -23,9 +23,11 @@ func savegame():
 	return data
 
 func loadgame():
-	data = load("user://player.tres")
+	player_data = load("user://player.tres")
 	
-	if "position" in data:
-		$CharacterBody2D.position = data.position
-	if "rotation" in data:
-		$CharacterBody2D/AnimatedSprite2D.set_flip_h(data.rotation)
+	if "position" in player_data:
+		$CharacterBody2D.position = player_data.position
+	if "rotation" in player_data:
+		$CharacterBody2D/AnimatedSprite2D.set_flip_h(player_data.rotation)
+	
+	print("Load successful. (Player Data)")

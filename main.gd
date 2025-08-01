@@ -5,13 +5,10 @@ var save_level := "user://level.tres"
 @onready var Player:Node = $player
 @onready var Level:Node = $level
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	save_game()
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("save"):
 		save_game()
 	
@@ -19,9 +16,46 @@ func _process(delta: float) -> void:
 		load_game()
 
 func save_game():
-	ResourceSaver.save(Player.data, save_player)
-	ResourceSaver.save(Level.data, save_level)
+	ResourceSaver.save(Player.player_data, save_player)
+	ResourceSaver.save(Level.level_data, save_level)
 
 func load_game():
-	$player.loadgame()
-	$level.loadgame()
+	var player_data = load(save_player)
+	
+	if "position" in player_data:
+		$player/CharacterBody2D.position = player_data.position
+	if "rotation" in player_data:
+		$player/CharacterBody2D/AnimatedSprite2D.set_flip_h(player_data.rotation)
+	
+	print("Load successful. (Player Data)")
+	
+	var level_data = load("user://level.tres")
+	
+	if "button_map" in level_data:
+		print(level_data.button_map)
+		for i in len(level_data.button_map):
+			if $level/btns/button.get_cell_atlas_coords(level_data.button_map[i]) \
+				in [Vector2i(2, 3)]:
+				if level_data.button_map[i] in $level.permaCells:
+					$level/btns/button.set_cell(level_data.button_map[i], 0, Vector2i(2, 2))
+					$level.permaButtons[i] = 0
+				elif level_data.button_map[i] in $level.tempCells:
+					$level/btns/button.set_cell(level_data.button_map[i], 0, Vector2i(0, 3))
+					$level.tempButtons[i - len($level.permaButtons)] = 0
+				print(level_data.button_map[i])
+			if $level/btns/button.get_cell_atlas_coords(level_data.button_map[i]) \
+				in [Vector2i(1, 1), Vector2i(2, 1)]:
+					$level/btns/button.set_cell(level_data.button_map[i], 0, Vector2i(2, 1))
+					print(level_data.button_map[i])
+	
+	if "door_map" in level_data:
+		print(level_data.door_map)
+		for i in len(level_data.door_map):
+			if $level/door.get_cell_atlas_coords(level_data.door_map[i]) in [Vector2i(1, 2), Vector2i(3, 0)]:
+				$level/door.set_cell(level_data.door_map[i], 0, Vector2i(1, 2))
+			if $level/door.get_cell_atlas_coords(level_data.door_map[i]) in [Vector2i(0, 2), Vector2i(3, 1)]:
+				$level/door.set_cell(level_data.door_map[i], 0, Vector2i(0, 2))
+	
+	$level/door.update_internals()
+	$level/btns/button.update_internals()
+	print("Load successful. (Level Data)")
