@@ -18,18 +18,3 @@ scale = Vector2(2.7, 2.7)
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(113, 514)
 scale = Vector2(2.5, 2.5)
-
-[node name="hud" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="hud"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="hud/Control"]
-custom_minimum_size = Vector2(9.22337e+18, 9.22337e+18)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0)

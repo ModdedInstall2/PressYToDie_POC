@@ -281,4 +281,19 @@ shape = SubResource("CapsuleShape2D_nvl01")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
+[node name="hud" type="CanvasLayer" parent="CharacterBody2D"]
+
+[node name="Control" type="Control" parent="CharacterBody2D/hud"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CharacterBody2D/hud/Control"]
+custom_minimum_size = Vector2(9.22337e+18, 9.22337e+18)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0)
+
 [connection signal="timeout" from="CharacterBody2D/DeathTimer" to="CharacterBody2D" method="_on_timer_timeout"]
