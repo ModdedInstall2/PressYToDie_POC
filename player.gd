@@ -220,7 +220,6 @@ func really_die():
 	$"sfx/really-die".play()
 	$AnimatedSprite2D.play(&"really_die")
 	await $AnimatedSprite2D.animation_finished
-	get_node("hud/Control/ColorRect").set_modulate(lerp(get_modulate(), Color(0, 0, 0, 1.0), 0.2))
+	Hud.transition()
+	await Hud.on_transition_finished
 	main_node.load_game()
-	await get_tree().create_timer(0.5).timeout
-	get_node("hud/Control/ColorRect").set_modulate(lerp(get_modulate(), Color(0, 0, 0, 0), 0.2))
