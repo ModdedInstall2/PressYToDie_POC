@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dh7a2y0b121b7"]
+[gd_scene load_steps=34 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c325hj2e4vlso" path="res://player_main.gd" id="1_b26j0"]
@@ -21,10 +21,6 @@ region = Rect2(16, 28, 16, 28)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
 atlas = ExtResource("1_4flbx")
 region = Rect2(0, 28, 16, 28)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
-atlas = ExtResource("3_dw050")
-region = Rect2(0, 0, 16, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nvl01"]
 atlas = ExtResource("3_dw050")
@@ -130,9 +126,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n7ghd")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_nvl01")
 }, {
 "duration": 1.0,
@@ -147,9 +140,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_606se")
 }],
-"loop": true,
+"loop": false,
 "name": &"fade",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -235,7 +228,7 @@ script = ExtResource("1_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_n7ghd")
-animation = &"really_die"
+animation = &"fade"
 
 [node name="Collision" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_nvl01")
@@ -280,20 +273,5 @@ collision_mask = 9
 shape = SubResource("CapsuleShape2D_nvl01")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-
-[node name="hud" type="CanvasLayer" parent="CharacterBody2D"]
-
-[node name="Control" type="Control" parent="CharacterBody2D/hud"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="CharacterBody2D/hud/Control"]
-custom_minimum_size = Vector2(9.22337e+18, 9.22337e+18)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0)
 
 [connection signal="timeout" from="CharacterBody2D/DeathTimer" to="CharacterBody2D" method="_on_timer_timeout"]

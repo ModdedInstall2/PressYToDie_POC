@@ -45,6 +45,10 @@ tile_set = ExtResource("1_vonw3")
 tile_map_data = PackedByteArray("AAANAAYAAAAAAAIAAAANAAUAAAABAAIAAAATAAYAAAAAAAIAAAATAAUAAAABAAIAAAA9AAsAAAABAAIAAAA9AAwAAAAAAAIAAAA=")
 tile_set = ExtResource("1_vonw3")
 
+[node name="door2" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAA9AAsAAAABAAIAAAA9AAwAAAAAAAIAAAA=")
+tile_set = ExtResource("1_vonw3")
+
 [node name="water" type="Area2D" parent="."]
 collision_layer = 9
 collision_mask = 9
@@ -78,6 +82,10 @@ shape = SubResource("RectangleShape2D_n6hdu")
 [node name="btns" type="Node2D" parent="."]
 
 [node name="button" type="TileMapLayer" parent="btns"]
+tile_map_data = PackedByteArray("AAAMAAYAAAACAAIAAAASAAYAAAAAAAMAAAA8AAoAAAACAAEAAAA6AAwAAAACAAIAAAA=")
+tile_set = ExtResource("1_vonw3")
+
+[node name="button2" type="TileMapLayer" parent="btns"]
 tile_map_data = PackedByteArray("AAAMAAYAAAACAAIAAAASAAYAAAAAAAMAAAA8AAoAAAACAAEAAAA6AAwAAAACAAIAAAA=")
 tile_set = ExtResource("1_vonw3")
 

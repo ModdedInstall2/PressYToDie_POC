@@ -2,25 +2,33 @@ extends CharacterBody2D
 
 const SPEED = 250.0
 const JUMP_VELOCITY = -400.0
-@onready var doubleJump = 0
-@onready var slope = 0
+@onready var doubleJump := 0
+@onready var slope := 0
 @onready var dash := 0
-@export var dead = false
-@onready var jumpedOffSlope = 0
+@export var dead := false
+@onready var jumpedOffSlope := 0
 @onready var really_dead := false
 @export var sprite : Node
-@onready var main_node = get_parent().get_parent()
+@onready var main_node := get_parent().get_parent()
 
 func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")
 
-func _physics_process(delta: float) -> void:
-	
+func _physics_process(delta: float) -> void:	
 	if not dead:
+		sprite.animation = &"idle"
 		motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 		set_collision_mask_value(1, true)
 		set_collision_mask_value(2, false)
 		set_collision_mask_value(3, true)
+		
+		if str($PlayerArea.get_overlapping_areas()).contains("water"):
+			if not sprite.animation in [&"fade", &"really_die"]:
+				sprite.play(&"fade")
+			if sprite.animation == &"fade" && sprite.frame == 4:
+				really_die()
+		elif sprite.animation == &"fade":
+			sprite.stop()
 		
 		if not is_on_floor():
 			velocity += get_gravity() * delta - $Collision/JumpDir.get_collision_normal()
@@ -32,7 +40,10 @@ func _physics_process(delta: float) -> void:
 		
 		if is_on_floor():
 			doubleJump = 0
-			if sprite.animation == &"jump":
+			if str($PlayerArea.get_overlapping_areas()).contains("water"):
+				if not sprite.animation in [&"fade", &"really_die"]:
+					sprite.play(&"fade")
+			elif sprite.animation == &"jump":
 				sprite.play(&"idle")
 			
 			set_floor_snap_length(5)
@@ -45,7 +56,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("a") and (is_on_floor() or doubleJump == 0 \
 			or str($PlayerArea.get_overlapping_areas()).contains("water")):
 			if str($PlayerArea.get_overlapping_areas()).contains("water"):
-				velocity.y = 0.25 * JUMP_VELOCITY
+				velocity.y = 0.2 * JUMP_VELOCITY
 			else:
 				velocity.y = JUMP_VELOCITY
 			if get_floor_normal().x < 0 and get_floor_normal().y != -1:
@@ -58,7 +69,8 @@ func _physics_process(delta: float) -> void:
 				await get_tree().process_frame
 			if (not $sfx/jump.is_playing()) or doubleJump == 1:
 				$sfx/jump.play()
-			sprite.play(&"jump", 0.6)
+			if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+				sprite.play(&"jump", 0.6)
 		
 		#if jumpedOffSlope == 1:
 		#	for i in range(5):
@@ -138,7 +150,8 @@ func _physics_process(delta: float) -> void:
 						velocity.y = -JUMP_VELOCITY
 					elif dashDirection == -1:
 						velocity.y = 1.25 * JUMP_VELOCITY
-				sprite.play(&"dash", 0.6)
+				if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+					sprite.play(&"dash", 0.6)
 				dash = 1
 				$sfx/dash.play()
 			else:
@@ -147,7 +160,8 @@ func _physics_process(delta: float) -> void:
 				else:
 					velocity.x = direction * SPEED
 				if is_on_floor() and direction:
-					sprite.play(&"walk", 1.5)
+					if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+						sprite.play(&"walk", 1.5)
 					if not $sfx/walk.is_playing():
 						$sfx/walk.play()
 					dash = 0
@@ -159,7 +173,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		if is_on_floor():
 			dash = 0
-		if not sprite.is_playing() or sprite.animation == &"die":
+		if not sprite.is_playing() or sprite.animation == &"die" \
+			or not str($PlayerArea.get_overlapping_areas()).contains("water"):
 			if not dead:
 				sprite.play(&"idle")
 	
@@ -169,22 +184,29 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(1, false)
 		set_collision_mask_value(2, true)
 		set_collision_mask_value(3, true)
-		sprite.play(&"die")
+		if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+			sprite.play(&"die")
 		
-		var direction := Input.get_axis("left", "right")
-		var yDirection := Input.get_axis("down", "up")
-		if direction or yDirection:
-			if direction < 0:
-				sprite.set_flip_h(1)
+		if str($PlayerArea.get_overlapping_areas()).contains("water") && \
+			sprite.animation not in [&"fade", &"really_die"] && not \
+			$"sfx/really-die".playing:
+			really_die()
+		
+		if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+			var direction := Input.get_axis("left", "right")
+			var yDirection := Input.get_axis("down", "up")
+			if direction or yDirection:
+				if direction < 0:
+					sprite.set_flip_h(1)
+				else:
+					sprite.set_flip_h(0)
+				velocity.x = direction * SPEED
+				velocity.y = -yDirection * SPEED
 			else:
-				sprite.set_flip_h(0)
-			velocity.x = direction * SPEED
-			velocity.y = -yDirection * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.y = move_toward(velocity.y, 0, SPEED)
-		
-		move_and_slide()
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+				velocity.y = move_toward(velocity.y, 0, SPEED)
+			
+			move_and_slide()
 	
 	if Input.is_action_just_pressed("y"):
 		await get_tree().create_timer(0.05).timeout
@@ -222,4 +244,5 @@ func really_die():
 	await $AnimatedSprite2D.animation_finished
 	Hud.transition()
 	await Hud.on_transition_finished
+	dead = false
 	main_node.load_game()
