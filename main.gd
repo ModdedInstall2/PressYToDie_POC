@@ -81,6 +81,11 @@ func load_game():
 			if $level/door2.get_cell_atlas_coords(level_data.door_map_2[i]) in [Vector2i(0, 2), Vector2i(3, 1)]:
 				$level/door2.set_cell(level_data.door_map_2[i], 0, Vector2i(0, 2))
 	
+	if "cubes" in level_data:
+		for i in len(level_data.cubes):
+			if level_data.cubes.size() >= i and get_node("level/cubes/" + str(i)):
+				get_node("level/cubes/" + str(i) + "/RigidBody2D").position = level_data.cubes[i]
+	
 	$level/door.update_internals()
 	$level/btns/button.update_internals()
 	$level/door2.update_internals()

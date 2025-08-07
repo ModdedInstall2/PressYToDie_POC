@@ -131,6 +131,9 @@ func _process(delta: float) -> void:
 			level_data.button_map_2 = $btns/button2.get_used_cells()
 		if "door_map_2" in level_data:
 			level_data.door_map_2 = $door2.get_used_cells()
+		if "cubes" in level_data:
+			for i in range(1):
+				level_data.cubes.insert(i, get_node("cubes/" + str(i) + "/RigidBody2D").position)
 	
 
 func savegame():
@@ -183,6 +186,12 @@ func loadgame():
 				$door2.set_cell(level_data.door_map_2[i], 0, Vector2i(1, 2))
 			elif $door2.get_cell_atlas_coords(level_data.door_map_2[i]) in [Vector2i(0, 2), Vector2i(3, 1)]:
 				$door2.set_cell(level_data.door_map_2[i], 0, Vector2i(0, 2))
+	
+	if "cubes" in level_data and saving == true:
+		for i in len(level_data.cubes):
+			var cube = str(i)
+			var cubeNode = get_node("cubes/" + cube + "/RigidBody2D")
+			cubeNode.position = level_data.cubes[i]
 	
 	$door.update_internals()
 	$btns/button.update_internals()
