@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://caohi1ntwjsxe"]
+[gd_scene load_steps=14 format=4 uid="uid://caohi1ntwjsxe"]
 
 [ext_resource type="Script" uid="uid://bmjltkm4g74w3" path="res://level.gd" id="1_0b4ue"]
 [ext_resource type="TileSet" uid="uid://c2eg33y437rex" path="res://tiles.tres" id="1_vonw3"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cu7s6mwxng62g" path="res://sfx/button.wav" id="5_f2txt"]
 [ext_resource type="TileSet" uid="uid://dbgxb8pkxu7gl" path="res://tiles_water.tres" id="6_1ainy"]
 [ext_resource type="PackedScene" uid="uid://djwwrbg3h3mnl" path="res://cube.tscn" id="7_n6hdu"]
+[ext_resource type="PackedScene" uid="uid://cy7at42afka8f" path="res://turret.tscn" id="8_km5ld"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_km5ld"]
 texture = ExtResource("2_oi3di")
@@ -122,3 +123,8 @@ stream = ExtResource("5_f2txt")
 
 [node name="0" parent="cubes" instance=ExtResource("7_n6hdu")]
 position = Vector2(296.1, 88.7609)
+
+[node name="turrets" type="Node2D" parent="."]
+
+[node name="0" parent="turrets" instance=ExtResource("8_km5ld")]
+position = Vector2(88.1818, 183.636)

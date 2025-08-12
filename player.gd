@@ -214,7 +214,7 @@ func _physics_process(delta: float) -> void:
 	#	$Camera2D.limit_right = 1050
 	#
 	#print(get_viewport().get_mouse_position())
-	print(str($PlayerArea.get_overlapping_areas()))
+	#print(str($PlayerArea.get_overlapping_areas()))
 	
 
 func _on_timer_timeout() -> void:
