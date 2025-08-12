@@ -131,9 +131,6 @@ func _process(delta: float) -> void:
 			level_data.button_map_2 = $btns/button2.get_used_cells()
 		if "door_map_2" in level_data:
 			level_data.door_map_2 = $door2.get_used_cells()
-		if "cubes" in level_data:
-			for i in range(1):
-				level_data.cubes.insert(i, get_node("cubes/" + str(i) + "/RigidBody2D").position)
 	
 
 func savegame():

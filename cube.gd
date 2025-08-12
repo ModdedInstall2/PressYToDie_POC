@@ -13,3 +13,5 @@ func _physics_process(delta: float) -> void:
 		rotation = get_floor_normal().angle() + PI/2
 	else:
 		rotation = 0
+	
+	move_and_slide()
