@@ -14,6 +14,7 @@ const JUMP_VELOCITY = -400.0
 
 func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")
+	set_collision_layer_value(16, true)
 
 func _physics_process(delta: float) -> void:	
 	if not dead:

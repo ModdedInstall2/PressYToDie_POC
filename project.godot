@@ -36,12 +36,13 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/vision_cone_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/magic_button/plugin.cfg", "res://addons/vision_cone_2d/plugin.cfg")
 
 [global_group]
 
 Persist="Persistent nodes"
 "Cube And Button Based Testing"=""
+"Lethal Military Android Targeting"=""
 
 [input]
 

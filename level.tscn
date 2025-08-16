@@ -122,7 +122,7 @@ stream = ExtResource("5_f2txt")
 [node name="cubes" type="Node2D" parent="."]
 
 [node name="0" parent="cubes" instance=ExtResource("7_n6hdu")]
-position = Vector2(296.1, 88.7609)
+position = Vector2(241.04, 100.948)
 
 [node name="turrets" type="Node2D" parent="."]
 
