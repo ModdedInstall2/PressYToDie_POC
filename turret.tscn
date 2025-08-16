@@ -99,3 +99,305 @@ polygon = PackedVector2Array(0, 0, 1147, -400, 1147, 400)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
 shape = SubResource("ConvexPolygonShape2D_2kw7u")
+
+[node name="Raycasts" type="Node" parent="CharacterBody2D"]
+
+[node name="0" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="1" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="2" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="3" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="4" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="5" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="6" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="7" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="8" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="9" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="10" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="11" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="12" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="13" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="14" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="15" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="16" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="17" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="18" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="19" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="20" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="21" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="22" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="23" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="24" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="25" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="26" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="27" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="28" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="29" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="30" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="31" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="32" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="33" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="34" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="35" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="36" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="37" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="38" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="39" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="40" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="41" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="42" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="43" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="44" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="45" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="46" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="47" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="48" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="49" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="50" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="51" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="52" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="53" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="54" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="55" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="56" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="57" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="58" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="59" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="60" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="61" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="62" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="63" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="64" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="65" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="66" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="67" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="68" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="69" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="70" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="71" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="72" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="73" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="74" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="75" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="76" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="77" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="78" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="79" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="80" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="81" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="82" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="83" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="84" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="85" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="86" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="87" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="88" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="89" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="90" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="91" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="92" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="93" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="94" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="95" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="96" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="97" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="98" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
+
+[node name="99" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+collision_mask = 131
