@@ -68,50 +68,43 @@ size = Vector2(6, 4)
 
 [node name="turret" type="Node2D"]
 
-[node name="TurretBody" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_3oylf")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TurretBody"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_tjdg3")
 animation = &"ghost"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretBody"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_2kw7u")
 
-[node name="Vision Cone Area" type="Area2D" parent="TurretBody"]
-position = Vector2(7, -6)
-collision_layer = 1023
-collision_mask = 1023
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TurretBody/Vision Cone Area"]
-position = Vector2(-10, 0)
-polygon = PackedVector2Array(10, 0, 15, -3, 15, 3)
-
-[node name="VisionCone2D" type="Node2D" parent="TurretBody" node_paths=PackedStringArray("write_collision_polygon")]
-position = Vector2(7, -6)
+[node name="VisionCone2D" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("write_collision_polygon")]
 rotation = -1.5708
 script = ExtResource("3_c5apd")
 angle_deg = 40
-max_distance = 1153.0
-collision_layer_mask = 1023
-write_collision_polygon = NodePath("../Vision Cone Area/CollisionPolygon2D")
+max_distance = 1000.0
+collision_layer_mask = 131
+write_collision_polygon = NodePath("../Area2D2/CollisionPolygon2D")
+debug_lines = true
 debug_shape = true
 metadata/_custom_type_script = "uid://bo744wpycscqd"
 
-[node name="Polygon2D" type="Polygon2D" parent="TurretBody/VisionCone2D"]
-
-[node name="beam" type="Area2D" parent="TurretBody"]
+[node name="beam" type="Area2D" parent="CharacterBody2D"]
 visible = false
-position = Vector2(3, -6)
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="TurretBody/beam"]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="CharacterBody2D/beam"]
 position = Vector2(7, 0)
 sprite_frames = SubResource("SpriteFrames_vt3mo")
 animation = &"ghost"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretBody/beam"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/beam"]
 position = Vector2(7, 0)
 shape = SubResource("RectangleShape2D_rcf7x")
 
-[connection signal="body_entered" from="TurretBody/Vision Cone Area" to="TurretBody" method="_on_vision_cone_area_body_entered"]
-[connection signal="body_exited" from="TurretBody/Vision Cone Area" to="TurretBody" method="_on_vision_cone_area_body_exited"]
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(-10, 0)
+polygon = PackedVector2Array(10, 0, 15, -3, 15, 3)

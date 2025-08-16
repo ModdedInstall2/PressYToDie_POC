@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dh7a2y0b121b7"]
+[gd_scene load_steps=36 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c325hj2e4vlso" path="res://player_main.gd" id="1_b26j0"]
@@ -234,14 +234,11 @@ height = 28.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
 size = Vector2(24, 37)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b26j0"]
-radius = 8.0
-
 [node name="player" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_b26j0")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing"]]
-collision_layer = 773
+collision_layer = 261
 script = ExtResource("1_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
@@ -299,13 +296,6 @@ collision_mask = 257
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/turret"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_b26j0")
-
-[node name="TurretBody" type="StaticBody2D" parent="CharacterBody2D"]
-collision_layer = 32768
-collision_mask = 0
-
-[node name="TurretCollision" type="CollisionShape2D" parent="CharacterBody2D/TurretBody"]
-shape = SubResource("CapsuleShape2D_b26j0")
 
 [node name="CharacterBody2D2" type="CharacterBody2D" parent="."]
 collision_layer = 136
