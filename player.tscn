@@ -298,17 +298,17 @@ collision_mask = 257
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_b26j0")
 
-[node name="CharacterBody2D2" type="CharacterBody2D" parent="."]
+[node name="Ragdoll" type="CharacterBody2D" parent="."]
 collision_layer = 136
 collision_mask = 241
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ragdoll"]
 sprite_frames = SubResource("SpriteFrames_n7ghd")
 animation = &"ragdoll"
 
-[node name="Collision" type="CollisionShape2D" parent="CharacterBody2D2"]
+[node name="Collision" type="CollisionShape2D" parent="Ragdoll"]
 shape = SubResource("CapsuleShape2D_nvl01")
 
-[node name="JumpDir" type="RayCast2D" parent="CharacterBody2D2/Collision"]
+[node name="JumpDir" type="RayCast2D" parent="Ragdoll/Collision"]
 
 [connection signal="timeout" from="CharacterBody2D/DeathTimer" to="CharacterBody2D" method="_on_timer_timeout"]

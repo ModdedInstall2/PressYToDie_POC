@@ -127,4 +127,4 @@ position = Vector2(241.04, 100.948)
 [node name="turrets" type="Node2D" parent="."]
 
 [node name="0" parent="turrets" instance=ExtResource("8_km5ld")]
-position = Vector2(88.1818, 183.636)
+position = Vector2(75.8828, 187.829)

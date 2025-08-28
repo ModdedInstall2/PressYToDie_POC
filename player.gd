@@ -10,7 +10,7 @@ const JUMP_VELOCITY = -400.0
 @onready var really_dead := false
 @export var sprite : Node
 @onready var main_node := get_parent().get_parent()
-@onready var ragdoll := get_parent().get_node("CharacterBody2D2")
+@onready var ragdoll := get_parent().get_node("Ragdoll")
 
 func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")

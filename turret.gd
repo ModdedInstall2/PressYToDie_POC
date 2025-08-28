@@ -24,25 +24,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		if is_on_floor():
 			has_touched_ground = true
-	print($Area2D2.overlaps_body(player))
-	if $Area2D2.overlaps_body(player):
-		if not str($Area2D2.get_overlapping_bodies()).contains("CubeBody"):
-			$beam.visible = true
-			$beam/BeamCollider.shape[3] = player.position
-			$beam/BeamCollider.shape[2].x = player.position.x
-			$beam/BeamCollider.shape[2].y = player.position.y - 2.0
-			if target == 0 and player.dead == false:
-				$"beam/Not Ghost".visible = true
-				$beam/Ghost.visible = false
-				$"beam/Not Ghost".shape[1] = player.position
-			elif target == 1 and player.dead == true:
-				$beam/Ghost.visible = true
-				$"beam/Not Ghost".visible = false
-				$beam/Ghost.shape[1] = player.position
-		else:
-			$beam.visible = false
-	else:
-		$beam.visible = false
+	for i in range(13):
+		if get_node("Raycast/" + str(i)):
+			if str(get_node("Raycast/" + str(i)).get_collider()).contains("CharacterBody2D"):
+				print(str(i) + " is touching the player")
 
 func get_local_scene_root(p_node : Node) -> Node:
 	while (p_node and not p_node.name == "root"):
