@@ -53,6 +53,7 @@ animation = &"ghost"
 shape = SubResource("CapsuleShape2D_2kw7u")
 
 [node name="VisionCone2D" type="Node2D" parent="TurretBody" node_paths=PackedStringArray("write_polygon2d")]
+position = Vector2(7.2292, -6.00051)
 rotation = -1.5708
 script = ExtResource("3_c5apd")
 angle_deg = 40
@@ -85,55 +86,57 @@ texture = ExtResource("5_2kw7u")
 texture_mode = 1
 
 [node name="Raycast" type="Node2D" parent="TurretBody"]
+position = Vector2(7.229, -6)
 
 [node name="0" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, -350)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="1" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, -287)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="2" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, -224)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="3" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, -161)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="4" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, -98)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="5" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, 0)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="6" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, 98)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="7" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, 161)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="8" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, 224)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="9" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, 287)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="10" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, 350)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="11" type="RayCast2D" parent="TurretBody/Raycast"]
 target_position = Vector2(1000, -35)
-collision_mask = 255
+collision_mask = 2147483903
 
 [node name="12" type="RayCast2D" parent="TurretBody/Raycast"]
+position = Vector2(-4.76837e-07, 0)
 target_position = Vector2(1000, 35)
-collision_mask = 255
+collision_mask = 2147483903

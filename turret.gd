@@ -25,10 +25,12 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			has_touched_ground = true
 	for i in range(13):
-		if get_node("Raycast/" + str(i)):
-			if str(get_node("Raycast/" + str(i)).get_collider()).contains("CharacterBody2D"):
+		var ray := $Raycast.get_node(str(i)) as RayCast2D
+		if ray and ray.is_colliding():
+			var collider = ray.get_collider()
+			if collider == player:
 				print(str(i) + " is touching the player")
-
+	
 func get_local_scene_root(p_node : Node) -> Node:
 	while (p_node and not p_node.name == "root"):
 		p_node = p_node.get_parent()
