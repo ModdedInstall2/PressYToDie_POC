@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 		if str($PlayerArea.get_overlapping_areas()).contains("water"):
 			if really_dead == false:
 				really_dead = true
-				dead = true
 				sprite.play(&"fade", 10)
 				await sprite.animation_finished
 				really_die()
@@ -222,14 +221,13 @@ func _on_timer_timeout() -> void:
 	dead = false
 
 func really_die():
-	if dead == true:
-		$"sfx/really-die".play()
+	$"sfx/really-die".play()
 	$AnimatedSprite2D.play(&"really_die")
 	await $AnimatedSprite2D.animation_finished
-	dead = false
 	$DeathTimer.start(1.0)
 	Hud.transition()
 	await Hud.on_transition_finished
+	dead = false
 	main_node.load_game()
 	really_dead = false
 	

@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 			var collider = ray.get_collider()
 			if collider == player:
 				print(str(i) + " is touching the player")
-	
+
 func get_local_scene_root(p_node : Node) -> Node:
 	while (p_node and not p_node.name == "root"):
 		p_node = p_node.get_parent()

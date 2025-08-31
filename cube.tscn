@@ -38,8 +38,8 @@ animations = [{
 [node name="cube" type="Node2D"]
 
 [node name="CubeBody" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing"]]
-collision_layer = 32897
-collision_mask = 32897
+collision_layer = 129
+collision_mask = 129
 script = ExtResource("1_wd2d1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CubeBody"]
