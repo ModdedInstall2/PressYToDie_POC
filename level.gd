@@ -1,13 +1,13 @@
 extends Node2D
 
-var permaButtons := [0]
-var permaCells := [Vector2i(12, 6)]
-var permaLights := [Vector2i(13, 3)]
-var permaDoors := [[Vector2i(13, 5), Vector2i(13, 6)]]
-var permaButtons2 := [0]
-var permaCells2 := [Vector2i(12, 6)]
-var permaLights2 := [Vector2i(13, 4)]
-var permaDoors2 := [[Vector2i(13, 1), Vector2i(13, 2)]]
+var permaButtons := [0, 0]
+var permaCells := [Vector2i(12, 6), Vector2i(58, 12)]
+var permaLights := [Vector2i(13, 3), Vector2i(60, 10)]
+var permaDoors := [[Vector2i(13, 5), Vector2i(13, 6)], [Vector2i(61, 11), Vector2i(61, 12)]]
+var permaButtons2 := [0, 0]
+var permaCells2 := [Vector2i(12, 6), Vector2i(58, 12)]
+var permaLights2 := [Vector2i(13, 4), Vector2i(60, 10)]
+var permaDoors2 := [[Vector2i(13, 1), Vector2i(13, 2)], [Vector2i(61, 11), Vector2i(61, 12)]]
 var tempButtons := [0]
 var tempCells := [Vector2i(18, 6)]
 var tempLights := [Vector2i(19, 4)]
@@ -16,8 +16,12 @@ var tempButtons2 := [0]
 var tempCells2 := [Vector2i(18, 6)]
 var tempLights2 := [Vector2i(19, 3)]
 var tempDoors2 := [[Vector2i(19, 1), Vector2i(19, 2)]]
+@onready var cubes = 1
 @export var level_data:LevelData
 @onready var saving := false
+@onready var player : Node = get_tree().get_first_node_in_group("Test Subject 234")
+@export var level : int
+@onready var main_node := get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,6 +50,8 @@ func _ready() -> void:
 		var door := Array(tempDoors2[i])
 		$door2.set_cell(door[0], 0, Vector2i(1, 2))
 		$door2.set_cell(door[1], 0, Vector2i(0, 2))
+	for i in range(cubes):
+		level_data.cubes.append(get_node("cubes/" + str(i) + "/CubeBody").position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -123,6 +129,17 @@ func _process(delta: float) -> void:
 					$door2.set_cell(door[0], 0, Vector2i(1, 2))
 					$door2.set_cell(door[1], 0, Vector2i(0, 2))
 					tempButtons2[i] = 0
+			
+		for i in range(2):
+			if get_node("level_list/" + str(i)):
+				if get_node("level_list/" + str(i)).overlaps_body(player):
+					if level != i:
+						main_node.save_game()
+						level = i
+					get_node("cams/" + str(i)).enabled = true
+				else:
+					get_node("cams/" + str(i)).enabled = false
+		
 		if "button_map" in level_data:
 			level_data.button_map = $btns/button.get_used_cells()
 		if "door_map" in level_data:
@@ -187,7 +204,7 @@ func loadgame():
 	if "cubes" in level_data and saving == true:
 		for i in len(level_data.cubes):
 			var cube = str(i)
-			var cubeNode = get_node("cubes/" + cube + "/RigidBody2D")
+			var cubeNode = get_node("cubes/" + cube + "/CubeBody")
 			cubeNode.position = level_data.cubes[i]
 	
 	$door.update_internals()

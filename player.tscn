@@ -1,14 +1,19 @@
-[gd_scene load_steps=36 format=3 uid="uid://dh7a2y0b121b7"]
+[gd_scene load_steps=38 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c325hj2e4vlso" path="res://player_main.gd" id="1_b26j0"]
 [ext_resource type="Script" uid="uid://b2b5lxdq0n6ir" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dncqmfo2crfeb" path="res://player-really-dying.png" id="3_dw050"]
+[ext_resource type="Texture2D" uid="uid://dx6ei45h3r3sk" path="res://tileset.png" id="3_n7ghd"]
 [ext_resource type="AudioStream" uid="uid://c4divri036g2t" path="res://sfx/walk.wav" id="4_hqtel"]
 [ext_resource type="AudioStream" uid="uid://r0q4u1x48edh" path="res://sfx/jump.wav" id="5_sweqy"]
 [ext_resource type="AudioStream" uid="uid://b3v82xn5dnsg7" path="res://sfx/dash.wav" id="6_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://cvxq0e5clwl7b" path="res://sfx/die.wav" id="7_1jxqw"]
 [ext_resource type="AudioStream" uid="uid://c7yrqj35gn4k0" path="res://sfx/really_die.wav" id="9_b26j0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm5j8"]
+atlas = ExtResource("3_n7ghd")
+region = Rect2(20, 32, 4, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -104,6 +109,14 @@ region = Rect2(48, 0, 16, 28)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n7ghd"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm5j8")
+}],
+"loop": false,
+"name": &"blank",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_onrkg")
@@ -237,14 +250,15 @@ size = Vector2(24, 37)
 [node name="player" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_b26j0")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing", "Lethal Military Android Targeting"]]
-collision_layer = 2147516677
-collision_mask = 32769
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing", "Lethal Military Android Targeting", "Test Subject 234"]]
+collision_layer = 2155905285
+collision_mask = 2147516417
 script = ExtResource("1_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_n7ghd")
-animation = &"ragdoll"
+animation = &"blank"
+autoplay = "blank"
 
 [node name="Collision" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_nvl01")
@@ -289,6 +303,7 @@ collision_mask = 32777
 shape = SubResource("CapsuleShape2D_nvl01")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+visible = false
 
 [node name="turret" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 257
@@ -299,6 +314,7 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_b26j0")
 
 [node name="Ragdoll" type="CharacterBody2D" parent="."]
+visible = false
 collision_layer = 136
 collision_mask = 241
 

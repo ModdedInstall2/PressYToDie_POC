@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy7at42afka8f"]
+[gd_scene load_steps=12 format=3 uid="uid://cy7at42afka8f"]
 
 [ext_resource type="Script" uid="uid://ds4nl7rj4axeg" path="res://turret.gd" id="1_3oylf"]
 [ext_resource type="Texture2D" uid="uid://c102ls7c3d4tm" path="res://turret.png" id="2_tjdg3"]
@@ -40,9 +40,12 @@ height = 24.0
 [sub_resource type="ConcavePolygonShape2D" id="ConcavePolygonShape2D_coqkk"]
 segments = PackedVector2Array(-3, -2, -3, 2, 1140, 2, 1140, -2)
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_2kw7u"]
+points = PackedVector2Array(0, 0, 1000, 350, 1000, -350)
+
 [node name="turret" type="Node2D"]
 
-[node name="TurretBody" type="CharacterBody2D" parent="." groups=["Lethal Military Android Targeting"]]
+[node name="TurretBody" type="CharacterBody2D" parent="." groups=["Lethal Military Android Targeting", "Lethal Military Androids"]]
 script = ExtResource("1_3oylf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TurretBody"]
@@ -67,6 +70,8 @@ color = Color(0, 0, 0, 0.415686)
 
 [node name="beam" type="Area2D" parent="TurretBody"]
 visible = false
+collision_layer = 2147483648
+collision_mask = 2147483648
 
 [node name="Ghost" type="Line2D" parent="TurretBody/beam"]
 visible = false
@@ -85,58 +90,22 @@ points = PackedVector2Array(4, 0, 1147, 0)
 texture = ExtResource("5_2kw7u")
 texture_mode = 1
 
-[node name="Raycast" type="Node2D" parent="TurretBody"]
+[node name="cone" type="ShapeCast2D" parent="TurretBody"]
+visible = false
 position = Vector2(7.229, -6)
+shape = SubResource("ConvexPolygonShape2D_2kw7u")
+target_position = Vector2(0, 0)
+max_results = 64
+collision_mask = 65535
 
-[node name="0" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, -350)
-collision_mask = 2147483903
+[node name="Area2D" type="Area2D" parent="TurretBody"]
+position = Vector2(7.229, -6)
+collision_mask = 65535
 
-[node name="1" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, -287)
-collision_mask = 2147483903
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TurretBody/Area2D"]
+polygon = PackedVector2Array(0, 0, 500, 180, 500, -180)
 
-[node name="2" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, -224)
-collision_mask = 2147483903
-
-[node name="3" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, -161)
-collision_mask = 2147483903
-
-[node name="4" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, -98)
-collision_mask = 2147483903
-
-[node name="5" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, 0)
-collision_mask = 2147483903
-
-[node name="6" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, 98)
-collision_mask = 2147483903
-
-[node name="7" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, 161)
-collision_mask = 2147483903
-
-[node name="8" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, 224)
-collision_mask = 2147483903
-
-[node name="9" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, 287)
-collision_mask = 2147483903
-
-[node name="10" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, 350)
-collision_mask = 2147483903
-
-[node name="11" type="RayCast2D" parent="TurretBody/Raycast"]
-target_position = Vector2(1000, -35)
-collision_mask = 2147483903
-
-[node name="12" type="RayCast2D" parent="TurretBody/Raycast"]
-position = Vector2(-4.76837e-07, 0)
-target_position = Vector2(1000, 35)
-collision_mask = 2147483903
+[node name="RayCast2D" type="RayCast2D" parent="TurretBody"]
+position = Vector2(7.229, -6)
+collision_mask = 255
+collide_with_areas = true

@@ -16,16 +16,18 @@ func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")
 	set_collision_layer_value(16, true)
 
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
 	if not dead:
 		motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 		set_collision_mask_value(1, true)
 		set_collision_mask_value(2, false)
 		set_collision_mask_value(3, true)
 		
-		if str($PlayerArea.get_overlapping_areas()).contains("water"):
+		if str($PlayerArea.get_overlapping_areas()).contains("water") \
+		or str($PlayerArea.get_overlapping_areas()).contains("BeamCollider"):
 			if really_dead == false:
 				really_dead = true
+				dead = true
 				sprite.play(&"fade", 10)
 				await sprite.animation_finished
 				really_die()
@@ -52,6 +54,8 @@ func _physics_process(delta: float) -> void:
 		apply_floor_snap()
 		
 		if Input.is_action_just_pressed("a") and (is_on_floor() or doubleJump == 0):
+			if really_dead == true:
+				really_dead = false
 			velocity.y = JUMP_VELOCITY
 			if get_floor_normal().x < 0 and get_floor_normal().y != -1:
 				jumpedOffSlope = -1
@@ -64,6 +68,8 @@ func _physics_process(delta: float) -> void:
 			if (not $sfx/jump.is_playing()) or doubleJump == 1:
 				$sfx/jump.play()
 			sprite.play(&"jump", 0.6)
+			if really_dead == true:
+				really_dead = false
 		
 		#if jumpedOffSlope == 1:
 		#	for i in range(5):
@@ -177,21 +183,23 @@ func _physics_process(delta: float) -> void:
 			
 			move_and_slide()
 		
-		ragdoll.visible = true
-		ragdoll.scale = Vector2(1, 1)
-		if not ragdoll.is_on_floor():
-			ragdoll.velocity += get_gravity() * delta
-		
-		if ragdoll.rotation_degrees > -90:
-			ragdoll.rotation_degrees -= 4
-		else:
-			ragdoll.rotation_degrees = -90
-		
-		ragdoll.move_and_slide()
+		if really_dead == false:
+			ragdoll.visible = true
+			ragdoll.scale = Vector2(1, 1)
+			if not ragdoll.is_on_floor():
+				ragdoll.velocity += get_gravity() * delta
+			
+			if ragdoll.rotation_degrees > -90:
+				ragdoll.rotation_degrees -= 4
+			else:
+				ragdoll.rotation_degrees = -90
+			
+			ragdoll.move_and_slide()
 	
 	if Input.is_action_just_pressed("y"):
 		await get_tree().create_timer(0.05).timeout
-		if str($PlayerArea.get_overlapping_areas()).contains("water"):
+		if str($PlayerArea.get_overlapping_areas()).contains("water") \
+		or str($PlayerArea.get_overlapping_areas()).contains("BeamCollider"):
 			if not dead:
 				really_die()
 			else:
@@ -224,10 +232,10 @@ func really_die():
 	$"sfx/really-die".play()
 	$AnimatedSprite2D.play(&"really_die")
 	await $AnimatedSprite2D.animation_finished
+	$AnimatedSprite2D.play("blank")
 	$DeathTimer.start(1.0)
 	Hud.transition()
 	await Hud.on_transition_finished
+	really_dead = false
 	dead = false
 	main_node.load_game()
-	really_dead = false
-	

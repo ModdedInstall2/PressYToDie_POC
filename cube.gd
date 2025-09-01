@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var player : Node = get_node("/root/Main/player/CharacterBody2D")
+@onready var player : Node = get_tree().get_first_node_in_group("Test Subject 234")
 @onready var grabbed = false
 
 func _physics_process(delta: float) -> void:

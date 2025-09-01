@@ -13,6 +13,7 @@ config_version=5
 config/name="Press Y To Die - POC"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -25,7 +26,7 @@ window/size/mode=3
 window/size/resizable=false
 window/size/extend_to_title=true
 window/stretch/mode="canvas_items"
-window/vsync/vsync_mode=2
+window/vsync/vsync_mode=0
 
 [editor]
 
@@ -43,6 +44,8 @@ enabled=PackedStringArray("res://addons/magic_button/plugin.cfg", "res://addons/
 Persist="Persistent nodes"
 "Cube And Button Based Testing"=""
 "Lethal Military Android Targeting"=""
+"Test Subject 234"=""
+"Lethal Military Androids"=""
 
 [input]
 

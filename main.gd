@@ -6,7 +6,7 @@ var save_level := "user://level.tres"
 @onready var Level:Node = $level
 
 func _ready() -> void:
-	pass
+	Engine.max_fps = 60
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("save"):
@@ -80,6 +80,13 @@ func load_game():
 				$level/door2.set_cell(level_data.door_map_2[i], 0, Vector2i(1, 2))
 			if $level/door2.get_cell_atlas_coords(level_data.door_map_2[i]) in [Vector2i(0, 2), Vector2i(3, 1)]:
 				$level/door2.set_cell(level_data.door_map_2[i], 0, Vector2i(0, 2))
+	
+	if "cubes" in level_data:
+		for i in len(level_data.cubes):
+			var cube = str(i)
+			var cubeNode = get_node("level/cubes/" + cube + "/CubeBody")
+			cubeNode.grabbed = false
+			cubeNode.position = level_data.cubes[i]
 	
 	$level/door.update_internals()
 	$level/btns/button.update_internals()
