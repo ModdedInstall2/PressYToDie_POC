@@ -1,10 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy7at42afka8f"]
+[gd_scene load_steps=7 format=3 uid="uid://3gkjfi5ywwiw"]
 
 [ext_resource type="Script" uid="uid://ds4nl7rj4axeg" path="res://turret.gd" id="1_3oylf"]
 [ext_resource type="Texture2D" uid="uid://c102ls7c3d4tm" path="res://turret.png" id="2_tjdg3"]
-[ext_resource type="Script" uid="uid://bo744wpycscqd" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_c5apd"]
-[ext_resource type="Texture2D" uid="uid://dr1ny6trrvp3h" path="res://turret-fire-1.png" id="4_coqkk"]
-[ext_resource type="Texture2D" uid="uid://bv31gyhqmppy7" path="res://turret-fire-2.png" id="5_2kw7u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5apd"]
 atlas = ExtResource("2_tjdg3")
@@ -37,12 +34,6 @@ animations = [{
 radius = 7.0
 height = 24.0
 
-[sub_resource type="ConcavePolygonShape2D" id="ConcavePolygonShape2D_coqkk"]
-segments = PackedVector2Array(-3, -2, -3, 2, 1140, 2, 1140, -2)
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_2kw7u"]
-points = PackedVector2Array(0, 0, 1000, 350, 1000, -350)
-
 [node name="turret" type="Node2D"]
 
 [node name="TurretBody" type="CharacterBody2D" parent="." groups=["Lethal Military Android Targeting", "Lethal Military Androids"]]
@@ -55,57 +46,5 @@ animation = &"ghost"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TurretBody"]
 shape = SubResource("CapsuleShape2D_2kw7u")
 
-[node name="VisionCone2D" type="Node2D" parent="TurretBody" node_paths=PackedStringArray("write_polygon2d")]
-position = Vector2(7.2292, -6.00051)
-rotation = -1.5708
-script = ExtResource("3_c5apd")
-angle_deg = 40
-max_distance = 1000.0
-collision_layer_mask = 131
-write_polygon2d = NodePath("Polygon2D")
-metadata/_custom_type_script = "uid://bo744wpycscqd"
-
-[node name="Polygon2D" type="Polygon2D" parent="TurretBody/VisionCone2D"]
-color = Color(0, 0, 0, 0.415686)
-
-[node name="beam" type="Area2D" parent="TurretBody"]
-visible = false
-collision_layer = 2147483648
-collision_mask = 2147483648
-
-[node name="Ghost" type="Line2D" parent="TurretBody/beam"]
-visible = false
-texture_repeat = 2
-points = PackedVector2Array(4, 0, 1147, 0)
-texture = ExtResource("4_coqkk")
-texture_mode = 1
-
-[node name="BeamCollider" type="CollisionShape2D" parent="TurretBody/beam"]
-shape = SubResource("ConcavePolygonShape2D_coqkk")
-
-[node name="Not Ghost" type="Line2D" parent="TurretBody/beam"]
-visible = false
-texture_repeat = 2
-points = PackedVector2Array(4, 0, 1147, 0)
-texture = ExtResource("5_2kw7u")
-texture_mode = 1
-
-[node name="cone" type="ShapeCast2D" parent="TurretBody"]
-visible = false
-position = Vector2(7.229, -6)
-shape = SubResource("ConvexPolygonShape2D_2kw7u")
-target_position = Vector2(0, 0)
-max_results = 64
-collision_mask = 65535
-
-[node name="Area2D" type="Area2D" parent="TurretBody"]
-position = Vector2(7.229, -6)
-collision_mask = 65535
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TurretBody/Area2D"]
-polygon = PackedVector2Array(0, 0, 500, 180, 500, -180)
-
 [node name="RayCast2D" type="RayCast2D" parent="TurretBody"]
-position = Vector2(7.229, -6)
-collision_mask = 255
-collide_with_areas = true
+target_position = Vector2(500, 0)

@@ -1,61 +1,42 @@
-extends CharacterBody2D
+extends Node2D
 
-@export_range(0, 1) var target : int
-var points : Array[Vector2] = []
-var has_touched_ground = false
-@onready var player : Node = get_tree().get_first_node_in_group("Test Subject 234")
-@onready var attack := false
+@export var BULLET: PackedScene = null
 
-func _ready() -> void:
-	$VisionCone2D.ray_count = 100
-	for i in range(100):
-		points.append(Vector2(1152.0, 400 - (8.25 * i)))
-	print(player)
+var target: Node2D = null
 
-func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	
-	if target == 0:
-		$AnimatedSprite2D.play(&"living")
-	elif target == 1:
-		$AnimatedSprite2D.play(&"dead")
-	
-	if has_touched_ground == false:
-		move_and_slide()
-		if is_on_floor():
-			has_touched_ground = true
-	
-	if str($Area2D.get_overlapping_bodies()).contains(str(player)):
-		var collider = $RayCast2D
-		collider.target_position = player.global_position
-		if str(collider.get_collider()).contains(str(player)):
-			print("The player is visible")
-			if (target == 0 and player.dead == false):
-				$beam.visible = true
-				$beam/BeamCollider.shape.segments[2] = player.position
-				$beam/BeamCollider.shape.segments[3] = player.position
-				$"beam/Ghost".visible = false
-				$"beam/Not Ghost".visible = true
-				$"beam/Not Ghost".points[1] = player.position
-			elif (target == 1 and player.dead == true):
-				$beam.visible = true
-				$beam/BeamCollider.shape.segments[2] = player.position
-				$beam/BeamCollider.shape.segments[3] = player.position
-				$"beam/Ghost".visible = true
-				$"beam/Ghost".visible = false
-				$"beam/Ghost".points[1] = player.position
-			else:
-				$beam.visible = false
-				$"beam/Ghost".visible = false
-				$"beam/Not Ghost".visible = false
-	else:
-		$beam.visible = false
-		$"beam/Ghost".visible = false
-		$"beam/Not Ghost".visible = false
+@onready var gunSprite = $AnimatedSprite2D
+@onready var rayCast = $RayCast2D
 
-func get_local_scene_root(p_node : Node) -> Node:
-	while (p_node and not p_node.name == "root"):
-		p_node = p_node.get_parent()
+func _ready():
+	await(get_tree().process_frame)
+	target = find_target()
+
+func _physics_process(delta):
+	if target != null:
+		var angle_to_target: float = global_position.direction_to(target.global_position).angle()
+		rayCast.global_rotation = angle_to_target
 		
-	return p_node as Node
+		if rayCast.is_colliding() and rayCast.get_collider().is_in_group("Test Subject 234"):
+			gunSprite.rotation = angle_to_target
+			shoot()
+
+func shoot():
+	print("PEW")
+	rayCast.enabled = false
+	
+	if BULLET:
+		var bullet: Node2D = BULLET.instance()
+		get_tree().current_scene.add_child(bullet)
+		bullet.global_position = global_position
+		bullet.global_rotation = rayCast.global_rotation
+
+func find_target():
+	var new_target: Node2D = null
+	
+	if get_tree().has_group("Test Subject 234"):
+		new_target = get_tree().get_nodes_in_group("Test Subject 234")[0]
+	
+	return new_target
+
+func _on_ReloadTimer_timeout():
+	rayCast.enabled = true

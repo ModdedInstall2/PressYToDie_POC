@@ -17,7 +17,7 @@ parameters/looping = true
 scale = Vector2(2.7, 2.7)
 
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(1694, 497)
+position = Vector2(99, 424)
 scale = Vector2(2.5, 2.5)
 
 [node name="So Stuff Works" type="Node" parent="."]

@@ -8,14 +8,14 @@ var permaButtons2 := [0, 0]
 var permaCells2 := [Vector2i(12, 6), Vector2i(58, 12)]
 var permaLights2 := [Vector2i(13, 4), Vector2i(60, 10)]
 var permaDoors2 := [[Vector2i(13, 1), Vector2i(13, 2)], [Vector2i(61, 11), Vector2i(61, 12)]]
-var tempButtons := [0]
-var tempCells := [Vector2i(18, 6)]
-var tempLights := [Vector2i(19, 4)]
-var tempDoors := [[Vector2i(19, 5), Vector2i(19, 6)]]
-var tempButtons2 := [0]
-var tempCells2 := [Vector2i(18, 6)]
-var tempLights2 := [Vector2i(19, 3)]
-var tempDoors2 := [[Vector2i(19, 1), Vector2i(19, 2)]]
+var tempButtons := [0, 0]
+var tempCells := [Vector2i(18, 6), Vector2i(82, 12)]
+var tempLights := [Vector2i(19, 4), Vector2i(87, 10)]
+var tempDoors := [[Vector2i(19, 5), Vector2i(19, 6)], [Vector2i(88, 11), Vector2i(88, 12)]]
+var tempButtons2 := [0, 0]
+var tempCells2 := [Vector2i(18, 6), Vector2i(82, 12)]
+var tempLights2 := [Vector2i(19, 3), Vector2i(87, 10)]
+var tempDoors2 := [[Vector2i(19, 1), Vector2i(19, 2)], [Vector2i(88, 11), Vector2i(88, 12)]]
 @onready var cubes = 1
 @export var level_data:LevelData
 @onready var saving := false
@@ -86,7 +86,6 @@ func _process(delta: float) -> void:
 						$btns/button.set_cell(tempCells[i], 0, Vector2i(2, 3))
 			elif currentBtn.get_overlapping_bodies() == []:
 				if tempButtons[i] == 1:
-					$btns/click.stop()
 					$btns/click.play()
 					$btns/button.set_cell(tempCells[i], 0, Vector2i(0, 3))
 					$btns/button.set_cell(tempLights[i], 0, Vector2i(2, 1))
@@ -130,7 +129,7 @@ func _process(delta: float) -> void:
 					$door2.set_cell(door[1], 0, Vector2i(0, 2))
 					tempButtons2[i] = 0
 			
-		for i in range(2):
+		for i in range(4):
 			if get_node("level_list/" + str(i)):
 				if get_node("level_list/" + str(i)).overlaps_body(player):
 					if level != i:

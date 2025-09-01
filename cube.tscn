@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://djwwrbg3h3mnl"]
+[gd_scene load_steps=9 format=3 uid="uid://djwwrbg3h3mnl"]
 
+[ext_resource type="Script" uid="uid://cuu7x71so653b" path="res://cube_main.gd" id="1_ftslj"]
 [ext_resource type="Texture2D" uid="uid://cmra8wgomm1ve" path="res://block.png" id="1_jbd7x"]
 [ext_resource type="Script" uid="uid://gymo5v36885e" path="res://cube.gd" id="1_wd2d1"]
 
@@ -36,9 +37,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wd2d1"]
 
 [node name="cube" type="Node2D"]
+script = ExtResource("1_ftslj")
 
 [node name="CubeBody" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing"]]
-collision_layer = 129
+collision_layer = 33554561
 collision_mask = 129
 script = ExtResource("1_wd2d1")
 
@@ -50,8 +52,9 @@ scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_n65sj")
 animation = &"alive"
 
-[node name="Area2D" type="Area2D" parent="CubeBody"]
-collision_mask = 256
+[node name="CubeArea" type="Area2D" parent="CubeBody"]
+collision_layer = 33554433
+collision_mask = 33554688
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CubeBody/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CubeBody/CubeArea"]
 shape = SubResource("RectangleShape2D_wd2d1")

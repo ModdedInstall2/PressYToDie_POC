@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdlcfobdc23jc"]
+
+[ext_resource type="Script" uid="uid://bhebpurycd8rc" path="res://bullet.gd" id="1_t4vbm"]
+[ext_resource type="Texture2D" uid="uid://dr1ny6trrvp3h" path="res://turret-fire-1.png" id="1_v8qja"]
+[ext_resource type="Texture2D" uid="uid://bv31gyhqmppy7" path="res://turret-fire-2.png" id="2_t4vbm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b2rl"]
+size = Vector2(5, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b7duk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_v8qja")
+}],
+"loop": true,
+"name": &"ghost",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_t4vbm")
+}],
+"loop": true,
+"name": &"living",
+"speed": 5.0
+}]
+
+[node name="bullet" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_t4vbm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_2b2rl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_b7duk")
+animation = &"living"

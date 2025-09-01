@@ -251,7 +251,7 @@ size = Vector2(24, 37)
 script = ExtResource("1_b26j0")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing", "Lethal Military Android Targeting", "Test Subject 234"]]
-collision_layer = 2155905285
+collision_layer = 2189459717
 collision_mask = 2147516417
 script = ExtResource("1_onrkg")
 

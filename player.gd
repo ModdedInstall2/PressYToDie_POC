@@ -82,61 +82,64 @@ func _physics_process(delta: float) -> void:
 		
 		var direction := Input.get_axis("left", "right")
 		var yDirection := Input.get_axis("down", "up")
-		var dashDirection
-		if 0.5 <= direction && direction <= 1:
-			if 0.5 <= yDirection && yDirection <= 1:
-				dashDirection = 0.25
-			elif -0.5 >= yDirection && yDirection >= -1:
-				dashDirection = 0.75
-			else:
-				dashDirection = 0.5
-		elif -0.5 >= direction && direction >= -1:
-			if 0.5 <= yDirection && yDirection <= 1:
-				dashDirection = -0.25
-			elif -0.5 >= yDirection && yDirection >= -1:
-				dashDirection = -0.75
-			else:
-				dashDirection = -0.5
-		elif 0.5 <= yDirection && yDirection <= 1:
-			dashDirection = -1
-		elif -0.5 >= yDirection && yDirection >= -1:
-			dashDirection = 1
+		# Dashing was scrapped to simplfy controls, and also bc it's kinda useless tbh.
+		# Any platform that you'd have to dash up to can also be reached with the (less
+		# janky) double jump.
+		#var dashDirection
+		#if 0.5 <= direction && direction <= 1:
+		#	if 0.5 <= yDirection && yDirection <= 1:
+		#		dashDirection = 0.25
+		#	elif -0.5 >= yDirection && yDirection >= -1:
+		#		dashDirection = 0.75
+		#	else:
+		#		dashDirection = 0.5
+		#elif -0.5 >= direction && direction >= -1:
+		#	if 0.5 <= yDirection && yDirection <= 1:
+		#		dashDirection = -0.25
+		#	elif -0.5 >= yDirection && yDirection >= -1:
+		#		dashDirection = -0.75
+		#	else:
+		#		dashDirection = -0.5
+		#elif 0.5 <= yDirection && yDirection <= 1:
+		#	dashDirection = -1
+		#elif -0.5 >= yDirection && yDirection >= -1:
+		#	dashDirection = 1
 		if direction or yDirection:
 			if direction < 0:
 				sprite.set_flip_h(1)
 			else:
 				sprite.set_flip_h(0)
-			if Input.is_action_just_pressed("b") and dash == 0:
-				if dashDirection == 0.25:
-					velocity.x = -JUMP_VELOCITY
-					velocity.y = JUMP_VELOCITY
-				elif dashDirection == 0.5:
-					velocity.x = 1.25 * -JUMP_VELOCITY
-				elif dashDirection == 0.75:
-					velocity.x = -JUMP_VELOCITY
-					velocity.y = -JUMP_VELOCITY
-				elif dashDirection == 1:
-					velocity.y = 1.25 * -JUMP_VELOCITY
-				elif dashDirection == -0.25:
-					velocity.x = JUMP_VELOCITY
-					velocity.y = JUMP_VELOCITY
-				elif dashDirection == -0.5:
-					velocity.x = 1.25 * JUMP_VELOCITY
-				elif dashDirection == -0.75:
-					velocity.x = JUMP_VELOCITY
-					velocity.y = -JUMP_VELOCITY
-				elif dashDirection == -1:
-					velocity.y = 1.25 * JUMP_VELOCITY
-				sprite.play(&"dash", 0.6)
-				dash = 1
-				$sfx/dash.play()
-			else:
-				velocity.x = direction * SPEED
-				if is_on_floor() and direction:
-					sprite.play(&"walk", 1.5)
-					if not $sfx/walk.is_playing():
-						$sfx/walk.play()
-					dash = 0
+			#if Input.is_action_just_pressed("b") and dash == 0:
+			#	if dashDirection == 0.25:
+			#		velocity.x = -JUMP_VELOCITY
+			#		velocity.y = JUMP_VELOCITY
+			#	elif dashDirection == 0.5:
+			#		velocity.x = 1.25 * -JUMP_VELOCITY
+			#	elif dashDirection == 0.75:
+			#		velocity.x = -JUMP_VELOCITY
+			#		velocity.y = -JUMP_VELOCITY
+			#	elif dashDirection == 1:
+			#		velocity.y = 1.25 * -JUMP_VELOCITY
+			#	elif dashDirection == -0.25:
+			#		velocity.x = JUMP_VELOCITY
+			#		velocity.y = JUMP_VELOCITY
+			#	elif dashDirection == -0.5:
+			#		velocity.x = 1.25 * JUMP_VELOCITY
+			#	elif dashDirection == -0.75:
+			#		velocity.x = JUMP_VELOCITY
+			#		velocity.y = -JUMP_VELOCITY
+			#	elif dashDirection == -1:
+			#		velocity.y = 1.25 * JUMP_VELOCITY
+			#	sprite.play(&"dash", 0.6)
+			#	dash = 1
+			#	$sfx/dash.play()
+			#else:
+			velocity.x = direction * SPEED
+			if is_on_floor() and direction:
+				sprite.play(&"walk", 1.5)
+				if not $sfx/walk.is_playing():
+					$sfx/walk.play()
+				dash = 0
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			if sprite.animation == &"walk":
