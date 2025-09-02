@@ -11,6 +11,7 @@ const JUMP_VELOCITY = -400.0
 @export var sprite : Node
 @onready var main_node := get_parent().get_parent()
 @onready var ragdoll := get_parent().get_node("Ragdoll")
+@onready var in_wall := false
 
 func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")
@@ -231,7 +232,14 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_timer_timeout() -> void:
-	dead = false
+	if not str($IsInWall.get_overlapping_bodies()).contains("white"):
+		dead = false
+		in_wall = false
+	else:
+		if not in_wall:
+			in_wall = true
+			$"sfx/save-yourself".play()
+		$DeathTimer.start(1.0)
 
 func really_die():
 	$"sfx/really-die".play()

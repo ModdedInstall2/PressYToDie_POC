@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dh7a2y0b121b7"]
+[gd_scene load_steps=39 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c325hj2e4vlso" path="res://player_main.gd" id="1_b26j0"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://b3v82xn5dnsg7" path="res://sfx/dash.wav" id="6_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://cvxq0e5clwl7b" path="res://sfx/die.wav" id="7_1jxqw"]
 [ext_resource type="AudioStream" uid="uid://c7yrqj35gn4k0" path="res://sfx/really_die.wav" id="9_b26j0"]
+[ext_resource type="AudioStream" uid="uid://brvu66llp162f" path="res://sfx/save_yourself.mp3" id="11_nvl01"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jm5j8"]
 atlas = ExtResource("3_n7ghd")
@@ -245,7 +246,7 @@ radius = 7.0
 height = 28.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
-size = Vector2(24, 37)
+size = Vector2(2.70261, 2.57976)
 
 [node name="player" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_b26j0")
@@ -295,6 +296,9 @@ stream = ExtResource("7_1jxqw")
 [node name="really-die" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("9_b26j0")
 
+[node name="save-yourself" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
+stream = ExtResource("11_nvl01")
+
 [node name="PlayerArea" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 32777
 collision_mask = 32777
@@ -305,12 +309,12 @@ shape = SubResource("CapsuleShape2D_nvl01")
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 visible = false
 
-[node name="turret" type="Area2D" parent="CharacterBody2D"]
+[node name="IsInWall" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 257
 collision_mask = 257
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/turret"]
-position = Vector2(0, -0.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/IsInWall"]
+position = Vector2(-0.0114937, -0.0139742)
 shape = SubResource("RectangleShape2D_b26j0")
 
 [node name="Ragdoll" type="CharacterBody2D" parent="."]
