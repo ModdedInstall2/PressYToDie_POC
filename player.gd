@@ -37,10 +37,12 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			velocity += get_gravity() * delta - $Collision/JumpDir.get_collision_normal()
 		
-		if is_on_floor():
-			rotation = get_floor_normal().angle() + PI/2
-		else:
-			rotation = 0
+		# You don't even want to know how long it took to get this pathetic little
+		# thing to exist - only for it to be useless.
+		#if is_on_floor():
+		#	rotation = get_floor_normal().angle() + PI/2
+		#else:
+		#	rotation = 0
 		
 		if is_on_floor():
 			doubleJump = 0

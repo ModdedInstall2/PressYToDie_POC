@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://3gkjfi5ywwiw"]
+[gd_scene load_steps=8 format=3 uid="uid://3gkjfi5ywwiw"]
 
 [ext_resource type="Script" uid="uid://ds4nl7rj4axeg" path="res://turret.gd" id="1_3oylf"]
 [ext_resource type="Texture2D" uid="uid://c102ls7c3d4tm" path="res://turret.png" id="2_tjdg3"]
+[ext_resource type="Script" uid="uid://bo744wpycscqd" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_c5apd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5apd"]
 atlas = ExtResource("2_tjdg3")
@@ -47,4 +48,23 @@ animation = &"ghost"
 shape = SubResource("CapsuleShape2D_2kw7u")
 
 [node name="RayCast2D" type="RayCast2D" parent="TurretBody"]
+position = Vector2(6.99698, -6.03302)
 target_position = Vector2(500, 0)
+
+[node name="VisionCone2D" type="Node2D" parent="TurretBody" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
+position = Vector2(6.99698, -6.03302)
+rotation = -1.5708
+script = ExtResource("3_c5apd")
+angle_deg = 45
+max_distance = 750.0
+collision_layer_mask = 131
+write_collision_polygon = NodePath("Area2D/CollisionPolygon2D")
+write_polygon2d = NodePath("Polygon2D")
+metadata/_custom_type_script = "uid://bo744wpycscqd"
+
+[node name="Area2D" type="Area2D" parent="TurretBody/VisionCone2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TurretBody/VisionCone2D/Area2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="TurretBody/VisionCone2D"]
+color = Color(0.486275, 0.486275, 0.486275, 0.478431)

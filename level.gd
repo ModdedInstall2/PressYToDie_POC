@@ -1,21 +1,25 @@
 extends Node2D
 
-var permaButtons := [0, 0]
-var permaCells := [Vector2i(12, 6), Vector2i(58, 12)]
-var permaLights := [Vector2i(13, 3), Vector2i(60, 10)]
-var permaDoors := [[Vector2i(13, 5), Vector2i(13, 6)], [Vector2i(61, 11), Vector2i(61, 12)]]
-var permaButtons2 := [0, 0]
-var permaCells2 := [Vector2i(12, 6), Vector2i(58, 12)]
-var permaLights2 := [Vector2i(13, 4), Vector2i(60, 10)]
-var permaDoors2 := [[Vector2i(13, 1), Vector2i(13, 2)], [Vector2i(61, 11), Vector2i(61, 12)]]
-var tempButtons := [0, 0]
-var tempCells := [Vector2i(18, 6), Vector2i(82, 12)]
-var tempLights := [Vector2i(19, 4), Vector2i(87, 10)]
-var tempDoors := [[Vector2i(19, 5), Vector2i(19, 6)], [Vector2i(88, 11), Vector2i(88, 12)]]
-var tempButtons2 := [0, 0]
-var tempCells2 := [Vector2i(18, 6), Vector2i(82, 12)]
-var tempLights2 := [Vector2i(19, 3), Vector2i(87, 10)]
-var tempDoors2 := [[Vector2i(19, 1), Vector2i(19, 2)], [Vector2i(88, 11), Vector2i(88, 12)]]
+var permaButtons := [0, 0, 0]
+var permaCells := [Vector2i(12, 6), Vector2i(58, 12), Vector2i(138, 12)]
+var permaLights := [Vector2i(13, 3), Vector2i(60, 10), Vector2i(141, 10)]
+var permaDoors := [[Vector2i(13, 5), Vector2i(13, 6)], [Vector2i(61, 11), Vector2i(61, 12)], \
+[Vector2i(142, 11), Vector2i(142, 12)]]
+var permaButtons2 := [0, 0, 0]
+var permaCells2 := [Vector2i(12, 6), Vector2i(58, 12), Vector2i(138, 12)]
+var permaLights2 := [Vector2i(13, 4), Vector2i(60, 10), Vector2i(141, 10)]
+var permaDoors2 := [[Vector2i(13, 1), Vector2i(13, 2)], [Vector2i(61, 11), Vector2i(61, 12)], \
+[Vector2i(142, 11), Vector2i(142, 12)]]
+var tempButtons := [0, 0, 0]
+var tempCells := [Vector2i(18, 6), Vector2i(82, 12), Vector2i(110, 12)]
+var tempLights := [Vector2i(19, 4), Vector2i(87, 10), Vector2i(114, 10)]
+var tempDoors := [[Vector2i(19, 5), Vector2i(19, 6)], [Vector2i(88, 11), Vector2i(88, 12)], \
+[Vector2i(115, 11), Vector2i(115, 12)]]
+var tempButtons2 := [0, 0, 0]
+var tempCells2 := [Vector2i(18, 6), Vector2i(82, 12), Vector2i(110, 12)]
+var tempLights2 := [Vector2i(19, 3), Vector2i(87, 10), Vector2i(114, 10)]
+var tempDoors2 := [[Vector2i(19, 1), Vector2i(19, 2)], [Vector2i(88, 11), Vector2i(88, 12)], \
+[Vector2i(115, 11), Vector2i(115, 12)]]
 @onready var cubes = 1
 @export var level_data:LevelData
 @onready var saving := false
@@ -129,13 +133,15 @@ func _process(delta: float) -> void:
 					$door2.set_cell(door[1], 0, Vector2i(0, 2))
 					tempButtons2[i] = 0
 			
-		for i in range(4):
+		for i in range(5):
 			if get_node("level_list/" + str(i)):
 				if get_node("level_list/" + str(i)).overlaps_body(player):
 					if level != i:
 						main_node.save_game()
 						level = i
 					get_node("cams/" + str(i)).enabled = true
+					await get_tree().create_timer(0.25).timeout
+					main_node.load_game
 				else:
 					get_node("cams/" + str(i)).enabled = false
 		

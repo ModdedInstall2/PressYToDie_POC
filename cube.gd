@@ -36,14 +36,10 @@ func _physics_process(delta: float) -> void:
 			set_collision_mask_value(8, false)
 			set_collision_layer_value(1, false)
 			set_collision_layer_value(8, false)
+		
 		if node.plane == 0:
 			if not is_on_floor():
 				velocity += get_gravity() * delta
-		
-		if is_on_floor():
-			rotation = get_floor_normal().angle() + PI/2
-		else:
-			rotation = 0
 		
 		if node.plane == 0 and grabbed == false:
 			move_and_slide()

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dh7a2y0b121b7" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://caohi1ntwjsxe" path="res://level.tscn" id="2_0xm2m"]
 [ext_resource type="AudioStream" uid="uid://dlv80pwlt60nm" path="res://Fallen Down - Toby Fox.ogg" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://cy7at42afka8f" path="res://turret.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://3gkjfi5ywwiw" path="res://turret.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_1bvp3")
@@ -17,7 +17,7 @@ parameters/looping = true
 scale = Vector2(2.7, 2.7)
 
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(99, 424)
+position = Vector2(463, 438)
 scale = Vector2(2.5, 2.5)
 
 [node name="So Stuff Works" type="Node" parent="."]
