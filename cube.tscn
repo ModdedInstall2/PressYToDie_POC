@@ -35,21 +35,22 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wd2d1"]
-size = Vector2(20, 37.7137)
+size = Vector2(20, 46.8023)
 
 [node name="cube" type="Node2D"]
 script = ExtResource("1_ftslj")
 
 [node name="CubeBody" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing"]]
-collision_layer = 33554561
-collision_mask = 129
+collision_layer = 33816705
+collision_mask = 262273
 script = ExtResource("1_wd2d1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CubeBody"]
+scale = Vector2(2.07843, 2.07843)
 shape = SubResource("RectangleShape2D_y8ul7")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="CubeBody"]
-scale = Vector2(1.25, 1.25)
+scale = Vector2(2.59803, 2.59803)
 sprite_frames = SubResource("SpriteFrames_n65sj")
 animation = &"alive"
 
@@ -58,5 +59,8 @@ collision_layer = 33554433
 collision_mask = 33554688
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CubeBody/CubeArea"]
-position = Vector2(0, -0.0990772)
 shape = SubResource("RectangleShape2D_wd2d1")
+
+[node name="RayCast2D" type="RayCast2D" parent="CubeBody"]
+target_position = Vector2(0, -50)
+collision_mask = 262144

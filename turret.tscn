@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://3gkjfi5ywwiw"]
+[gd_scene load_steps=10 format=3 uid="uid://3gkjfi5ywwiw"]
 
 [ext_resource type="Script" uid="uid://ds4nl7rj4axeg" path="res://turret.gd" id="1_3oylf"]
+[ext_resource type="Script" uid="uid://dwb7vdotfp8lr" path="res://turret_main.gd" id="1_coqkk"]
 [ext_resource type="Texture2D" uid="uid://c102ls7c3d4tm" path="res://turret.png" id="2_tjdg3"]
 [ext_resource type="Script" uid="uid://bo744wpycscqd" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_c5apd"]
 
@@ -35,7 +36,11 @@ animations = [{
 radius = 7.0
 height = 24.0
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_coqkk"]
+points = PackedVector2Array(0, -0.5, 1, -0.5, 1, 0.5, 0, 0.5)
+
 [node name="turret" type="Node2D"]
+script = ExtResource("1_coqkk")
 
 [node name="TurretBody" type="CharacterBody2D" parent="." groups=["Lethal Military Android Targeting", "Lethal Military Androids"]]
 script = ExtResource("1_3oylf")
@@ -48,8 +53,10 @@ animation = &"ghost"
 shape = SubResource("CapsuleShape2D_2kw7u")
 
 [node name="RayCast2D" type="RayCast2D" parent="TurretBody"]
+visible = false
 position = Vector2(6.99698, -6.03302)
 target_position = Vector2(500, 0)
+collision_mask = 262147
 
 [node name="VisionCone2D" type="Node2D" parent="TurretBody" node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
 position = Vector2(6.99698, -6.03302)
@@ -68,3 +75,11 @@ metadata/_custom_type_script = "uid://bo744wpycscqd"
 
 [node name="Polygon2D" type="Polygon2D" parent="TurretBody/VisionCone2D"]
 color = Color(0.486275, 0.486275, 0.486275, 0.478431)
+
+[node name="Area2D" type="Area2D" parent="TurretBody"]
+position = Vector2(7.00464, -6.0319)
+collision_layer = 262147
+collision_mask = 262147
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TurretBody/Area2D"]
+shape = SubResource("ConvexPolygonShape2D_coqkk")

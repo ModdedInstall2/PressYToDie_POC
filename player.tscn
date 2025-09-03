@@ -298,6 +298,7 @@ stream = ExtResource("9_b26j0")
 
 [node name="save-yourself" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("11_nvl01")
+volume_db = 24.0
 
 [node name="PlayerArea" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 32777

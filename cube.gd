@@ -45,7 +45,8 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 		
 	if Input.is_action_just_pressed("b"):
-		if str($CubeArea.get_overlapping_bodies()).contains(str(player)):
+		if str($CubeArea.get_overlapping_bodies()).contains(str(player)) \
+		and not str($RayCast2D.get_collider()).contains("mesh"):
 			if grabbed == false:
 				set_collision_mask_value(1, false)
 				set_collision_mask_value(8, false)

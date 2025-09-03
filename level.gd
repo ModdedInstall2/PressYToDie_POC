@@ -141,7 +141,7 @@ func _process(delta: float) -> void:
 						level = i
 					get_node("cams/" + str(i)).enabled = true
 					await get_tree().create_timer(0.25).timeout
-					main_node.load_game
+					#main_node.load_game()
 				else:
 					get_node("cams/" + str(i)).enabled = false
 		
