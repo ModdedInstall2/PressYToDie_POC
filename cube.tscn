@@ -35,7 +35,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wd2d1"]
-size = Vector2(20, 46.8023)
+size = Vector2(20, 38.6946)
 
 [node name="cube" type="Node2D"]
 script = ExtResource("1_ftslj")
