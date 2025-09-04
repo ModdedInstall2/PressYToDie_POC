@@ -9,25 +9,30 @@ var target: Node2D = null
 @onready var has_touched_ground := false
 @onready var player : Node = get_tree().get_first_node_in_group("Test Subject 234")
 @onready var main_node : Node = get_parent()
+@onready var cube_blocking := false
 
 func _ready():
 	await(get_tree().process_frame)
 	target = find_target()
 
 func _physics_process(delta):
-	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("PlayerArea"):
-		if target != null:
-			var angle_to_target: float = global_position.direction_to(target.global_position).angle()
-			$Area2D/CollisionShape2D.scale.x = target.position.x + 60.0
-			$Area2D/CollisionShape2D.global_rotation = angle_to_target
-			
-			if not str($Area2D.get_overlapping_areas()).contains("Cube"):
-				$VisionCone2D/Polygon2D.color = Color("#0000007a")
-				print("The player is visible")
+	if target != null:
+		var angle_to_target: float = global_position.direction_to(target.global_position).angle()
+		$Area2D/CollisionShape2D.scale.x = target.position.x + 50.0
+		$Area2D/CollisionShape2D.global_rotation = angle_to_target
+		
+		if str($Area2D.get_overlapping_areas()).contains("Cube"):
+			cube_blocking = true
 		else:
-			print("Couldn't find player")
+			cube_blocking = false
+	
+	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("PlayerArea") \
+	and cube_blocking == false:
+		$VisionCone2D/Polygon2D.color = Color("#0000007a")
+		print("The player is visible")
 	else:
 		$VisionCone2D/Polygon2D.color = Color("#7c7c7c7a")
+		print("The player is not visible")
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
