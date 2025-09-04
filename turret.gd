@@ -10,6 +10,7 @@ var target: Node2D = null
 @onready var player : Node = get_tree().get_first_node_in_group("Test Subject 234")
 @onready var main_node : Node = get_parent()
 @onready var cube_blocking := false
+@onready var correct_type := false
 
 func _ready():
 	await(get_tree().process_frame)
@@ -26,13 +27,20 @@ func _physics_process(delta):
 		else:
 			cube_blocking = false
 	
+	if main_node.type == 0 and player.dead == false \
+	or main_node.type == 1 and player.dead == true:
+		correct_type = true
+	else:
+		correct_type = false
+	
 	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("PlayerArea") \
-	and cube_blocking == false:
+	and cube_blocking == false \
+	and correct_type == true:
 		$VisionCone2D/Polygon2D.color = Color("#0000007a")
-		print("The player is visible")
+		#print("The player is visible")
 	else:
 		$VisionCone2D/Polygon2D.color = Color("#7c7c7c7a")
-		print("The player is not visible")
+		#print("The player is not visible")
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
