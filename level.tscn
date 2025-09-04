@@ -211,7 +211,6 @@ plane = 1
 
 [node name="0" parent="turrets" instance=ExtResource("8_km5ld")]
 position = Vector2(105.935, 185.575)
-type = 1
 
 [node name="cams" type="Node2D" parent="."]
 
