@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://3gkjfi5ywwiw"]
+[gd_scene load_steps=14 format=3 uid="uid://3gkjfi5ywwiw"]
 
 [ext_resource type="Script" uid="uid://ds4nl7rj4axeg" path="res://turret.gd" id="1_3oylf"]
 [ext_resource type="Script" uid="uid://dwb7vdotfp8lr" path="res://turret_main.gd" id="1_coqkk"]
 [ext_resource type="Texture2D" uid="uid://c102ls7c3d4tm" path="res://turret.png" id="2_tjdg3"]
 [ext_resource type="Script" uid="uid://bo744wpycscqd" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="3_c5apd"]
+[ext_resource type="Texture2D" uid="uid://bv31gyhqmppy7" path="res://turret-fire-2.png" id="5_mhatg"]
+[ext_resource type="Texture2D" uid="uid://dr1ny6trrvp3h" path="res://turret-fire-1.png" id="6_vt3mo"]
+[ext_resource type="AudioStream" uid="uid://3ljngshqe6q4" path="res://sfx/death_ray.wav" id="7_vt3mo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5apd"]
 atlas = ExtResource("2_tjdg3")
@@ -39,6 +42,9 @@ height = 24.0
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_coqkk"]
 points = PackedVector2Array(0, -0.5, 1, -0.5, 1, 0.5, 0, 0.5)
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_mhatg"]
+points = PackedVector2Array(0, 0.5, 0, 0.5, 0, -0.5, 0, -0.5)
+
 [node name="turret" type="Node2D"]
 script = ExtResource("1_coqkk")
 
@@ -63,6 +69,7 @@ position = Vector2(6.99698, -6.03302)
 rotation = -1.5708
 script = ExtResource("3_c5apd")
 angle_deg = 45
+ray_count = 200
 max_distance = 750.0
 collision_layer_mask = 131
 write_collision_polygon = NodePath("Area2D/CollisionPolygon2D")
@@ -83,3 +90,26 @@ collision_mask = 262147
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TurretBody/Area2D"]
 shape = SubResource("ConvexPolygonShape2D_coqkk")
+
+[node name="death_ray" type="Area2D" parent="TurretBody"]
+position = Vector2(7.00464, -6.0319)
+
+[node name="living" type="Line2D" parent="TurretBody/death_ray"]
+visible = false
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+texture = ExtResource("5_mhatg")
+texture_mode = 1
+
+[node name="dead" type="Line2D" parent="TurretBody/death_ray"]
+visible = false
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+texture = ExtResource("6_vt3mo")
+texture_mode = 1
+
+[node name="collider" type="CollisionShape2D" parent="TurretBody/death_ray"]
+shape = SubResource("ConvexPolygonShape2D_mhatg")
+
+[node name="zappy_zap" type="AudioStreamPlayer2D" parent="TurretBody"]
+stream = ExtResource("7_vt3mo")

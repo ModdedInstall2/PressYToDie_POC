@@ -24,8 +24,12 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(2, false)
 		set_collision_mask_value(3, true)
 		
+		if str($PlayerArea.get_overlapping_areas()).contains("death_ray"):
+			# Fix a minor glitch with turrets
+			await get_tree().create_timer(0.05).timeout
+		
 		if str($PlayerArea.get_overlapping_areas()).contains("water") \
-		or str($PlayerArea.get_overlapping_areas()).contains("BeamCollider"):
+		or str($PlayerArea.get_overlapping_areas()).contains("death_ray"):
 			if really_dead == false:
 				really_dead = true
 				dead = true
@@ -165,15 +169,30 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(1, false)
 		set_collision_mask_value(2, true)
 		set_collision_mask_value(3, true)
-		if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+		if not (str($PlayerArea.get_overlapping_areas()).contains("water") \
+		or str($PlayerArea.get_overlapping_areas()).contains("death_ray")):
 			sprite.play(&"die")
+		
+		if str($PlayerArea.get_overlapping_areas()).contains("death_ray"):
+			motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
+			set_collision_mask_value(1, true)
+			set_collision_mask_value(2, true)
+			set_collision_mask_value(3, true)
+			if not is_on_floor():
+				velocity += get_gravity() * delta - $Collision/JumpDir.get_collision_normal()
+		else:
+			motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+			set_collision_mask_value(1, false)
+			set_collision_mask_value(2, true)
+			set_collision_mask_value(3, true)
 		
 		if str($PlayerArea.get_overlapping_areas()).contains("water") && \
 			sprite.animation not in [&"fade", &"really_die"] && not \
 			$"sfx/really-die".playing && really_dead == false:
 			really_die()
 		
-		if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+		if not (str($PlayerArea.get_overlapping_areas()).contains("water") \
+		or str($PlayerArea.get_overlapping_areas()).contains("death_ray")):
 			var direction := Input.get_axis("left", "right")
 			var yDirection := Input.get_axis("down", "up")
 			if direction or yDirection:
@@ -187,7 +206,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				velocity.y = move_toward(velocity.y, 0, SPEED)
 			
-			move_and_slide()
+		move_and_slide()
 		
 		if really_dead == false:
 			ragdoll.visible = true
@@ -204,8 +223,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("y"):
 		await get_tree().create_timer(0.05).timeout
-		if str($PlayerArea.get_overlapping_areas()).contains("water") \
-		or str($PlayerArea.get_overlapping_areas()).contains("BeamCollider"):
+		if str($PlayerArea.get_overlapping_areas()).contains("water"):
 			if not dead:
 				really_die()
 			else:
