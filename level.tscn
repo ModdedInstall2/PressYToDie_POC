@@ -316,6 +316,30 @@ collision_mask = 132
 position = Vector2(2215.99, 353.179)
 shape = SubResource("RectangleShape2D_0b4ue")
 
+[node name="3" type="Area2D" parent="btns/permaTriggers"]
+position = Vector2(0, -153)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/permaTriggers/3"]
+position = Vector2(7032, 561.216)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="4" type="Area2D" parent="btns/permaTriggers"]
+position = Vector2(0, -153)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/permaTriggers/4"]
+position = Vector2(7959.97, 561.225)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="5" type="Area2D" parent="btns/permaTriggers"]
+position = Vector2(0, -153)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/permaTriggers/5"]
+position = Vector2(8392, 337.222)
+shape = SubResource("RectangleShape2D_0b4ue")
+
 [node name="tempTriggers" type="Node2D" parent="btns"]
 
 [node name="0" type="Area2D" parent="btns/tempTriggers"]
@@ -339,6 +363,190 @@ collision_mask = 132
 
 [node name="1" type="CollisionShape2D" parent="btns/tempTriggers/2"]
 position = Vector2(1767.96, 355.21)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="3" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(0, -153)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/3"]
+position = Vector2(2487.99, 467.193)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="4" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(0, -153)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/4"]
+position = Vector2(2952.01, 435.205)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="5" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(0, -153)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/5"]
+position = Vector2(3000.02, 435.219)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="6" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(0, -153)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/6"]
+position = Vector2(3272.01, 435.216)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="7" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.971, -153.007)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/7"]
+position = Vector2(3272.01, 435.216)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="8" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.971, -153.007)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/8"]
+position = Vector2(3336.04, 435.217)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="9" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.971, -153.007)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/9"]
+position = Vector2(3607.97, 419.23)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="10" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.971, -153.007)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/10"]
+position = Vector2(3992.02, 611.211)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="11" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.971, -153.007)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/11"]
+position = Vector2(4120.03, 611.23)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="12" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.971, -153.007)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/12"]
+position = Vector2(4584.02, 451.23)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="13" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.971, -153.007)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/13"]
+position = Vector2(4824.05, 355.228)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="14" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/14"]
+position = Vector2(4824.05, 355.228)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="15" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/15"]
+position = Vector2(5400.03, 723.234)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="16" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/16"]
+position = Vector2(5832.03, 723.216)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="17" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/17"]
+position = Vector2(5944.05, 675.234)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="18" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/18"]
+position = Vector2(6120.05, 755.232)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="19" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/19"]
+position = Vector2(6312.04, 755.232)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="20" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/20"]
+position = Vector2(7128.04, 771.221)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="21" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(175.96, -345.014)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/21"]
+position = Vector2(7192.07, 771.24)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="22" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(863.939, -409.029)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/22"]
+position = Vector2(7192.07, 771.24)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="23" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(863.939, -409.029)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/23"]
+position = Vector2(7848.07, 627.232)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="24" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(863.939, -409.029)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/24"]
+position = Vector2(7976.07, 579.244)
+shape = SubResource("RectangleShape2D_0b4ue")
+
+[node name="25" type="Area2D" parent="btns/tempTriggers"]
+position = Vector2(863.939, -409.029)
+collision_mask = 132
+
+[node name="1" type="CollisionShape2D" parent="btns/tempTriggers/25"]
+position = Vector2(8008.07, 579.251)
 shape = SubResource("RectangleShape2D_0b4ue")
 
 [node name="click" type="AudioStreamPlayer2D" parent="btns"]
