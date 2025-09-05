@@ -1,10 +1,13 @@
 extends Node2D
 
-var permaButtons := [0, 0, 0]
-var permaCells := [Vector2i(12, 6), Vector2i(58, 12), Vector2i(138, 12), Vector2i(439, 25), Vector2i(497, 25), Vector2i(524, 11)]
-var permaLights := [Vector2i(13, 3), Vector2i(60, 10), Vector2i(141, 10), Vector2i(442, 23), Vector2i(498, 23), Vector2i(526, 9)]
+var permaButtons := [0, 0, 0, 0, 0, 0]
+var permaCells := [Vector2i(12, 6), Vector2i(58, 12), Vector2i(138, 12), Vector2i(439, 25), \
+Vector2i(497, 25), Vector2i(524, 11)]
+var permaLights := [Vector2i(13, 3), Vector2i(60, 10), Vector2i(141, 10), Vector2i(442, 23), \
+Vector2i(498, 23), Vector2i(526, 9)]
 var permaDoors := [[Vector2i(13, 5), Vector2i(13, 6)], [Vector2i(61, 11), Vector2i(61, 12)], \
-[Vector2i(142, 11), Vector2i(142, 12)], [Vector2i(443, 24), Vector2i(443, 25)], [Vector2i(499, 24), Vector2i(499, 25)], [Vector2i(527, 10), Vector2i(527, 11)]]
+[Vector2i(142, 11), Vector2i(142, 12)], [Vector2i(443, 24), Vector2i(443, 25)], \
+[Vector2i(499, 24), Vector2i(499, 25)], [Vector2i(527, 10), Vector2i(527, 11)]]
 var tempButtons := [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 var tempCells := [Vector2i(18, 6), Vector2i(82, 12), Vector2i(110, 12), Vector2i(155, 19), \
 Vector2i(184, 17), Vector2i(-1, -1), Vector2i(204, 17), Vector2i(215, 17), Vector2i(-1, -1), \
