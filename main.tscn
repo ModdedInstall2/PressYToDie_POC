@@ -14,11 +14,11 @@ stream = ExtResource("3_h2yge")
 parameters/looping = true
 
 [node name="level" parent="." instance=ExtResource("2_0xm2m")]
-scale = Vector2(2.7, 2.7)
+scale = Vector2(1.35, 1.35)
 
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(1684, 476)
-scale = Vector2(2.5, 2.5)
+position = Vector2(967, 229)
+scale = Vector2(1.25, 1.25)
 
 [node name="So Stuff Works" type="Node" parent="."]
 

@@ -19,7 +19,9 @@ var tempLights := [Vector2i(19, 4), Vector2i(87, 10), Vector2i(114, 10), Vector2
 Vector2i(195, 15), Vector2i(-1, -1), Vector2i(209, 15), Vector2i(222, 15), Vector2i(-1, -1), \
 Vector2i(249, 15), Vector2i(253, 21), Vector2i(277, 16), Vector2i(298, 16), Vector2i(331, 10), \
 Vector2i(-1, -1), Vector2i(359, 21), Vector2i(378, 21), Vector2i(386, 18), Vector2i(414, 23), \
-Vector2i(470, 23), Vector2i(509, 9), Vector2i(550, 8), Vector2i(554, 8), Vector2i(-1, -1)]
+Vector2i(470, 23), Vector2i(509, 9), Vector2i(550, 8), Vector2i(554, 8), Vector2i(-1, -1), \
+Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1), \
+Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1)]
 var tempDoors := [[Vector2i(19, 5), Vector2i(19, 6)], [Vector2i(88, 11), Vector2i(88, 12)], \
 [Vector2i(115, 11), Vector2i(115, 12)], [Vector2i(169, 11), Vector2i(169, 12)], \
 [Vector2i(196, 16), Vector2i(196, 17)], [Vector2i(-1, -1), Vector2i(-1, -1)], \
@@ -47,7 +49,9 @@ var tempLights2 := [Vector2i(19, 3), Vector2i(87, 10), Vector2i(114, 10), Vector
 Vector2i(-1, -1), Vector2i(195, 15), Vector2i(209, 15), Vector2i(-1, -1), Vector2i(222, 15), \
 Vector2i(249, 15), Vector2i(253, 21), Vector2i(277, 16), Vector2i(304, 10), Vector2i(-1, -1), \
 Vector2i(331, 10), Vector2i(359, 21), Vector2i(386, 18), Vector2i(-1, -1), Vector2i(414, 23), \
-Vector2i(470, 23), Vector2i(509, 9), Vector2i(550, 8), Vector2i(-1, -1), Vector2i(554, 8)]
+Vector2i(470, 23), Vector2i(509, 9), Vector2i(550, 8), Vector2i(-1, -1), Vector2i(554, 8), \
+Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1), \
+Vector2i(-1, -1), Vector2i(-1, -1), Vector2i(-1, -1)]
 var tempDoors2 := [[Vector2i(19, 1), Vector2i(19, 2)], [Vector2i(88, 11), Vector2i(88, 12)], \
 [Vector2i(115, 11), Vector2i(115, 12)], [Vector2i(169, 11), Vector2i(169, 12)], \
 [Vector2i(-1, -1), Vector2i(-1, -1)], [Vector2i(196, 16), Vector2i(196, 17)], \
@@ -158,17 +162,17 @@ func _process(delta: float) -> void:
 					$door2.set_cell(door[1], 0, Vector2i(0, 2))
 					tempButtons2[i] = 0
 			
-		for i in range(5):
+		for i in range(20):
 			if get_node("level_list/" + str(i)):
 				if get_node("level_list/" + str(i)).overlaps_body(player):
 					if level != i:
-						main_node.save_game()
+						main_node.save_game()	
 						level = i
-					get_node("cams/" + str(i)).enabled = true
+					#get_node("cams/" + str(i)).enabled = true
 					await get_tree().create_timer(0.25).timeout
 					#main_node.load_game()
-				else:
-					get_node("cams/" + str(i)).enabled = false
+				#else:
+					#get_node("cams/" + str(i)).enabled = false
 		
 		if "button_map" in level_data:
 			level_data.button_map = $btns/button.get_used_cells()

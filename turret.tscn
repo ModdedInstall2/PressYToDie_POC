@@ -69,11 +69,12 @@ position = Vector2(6.99698, -6.03302)
 rotation = -1.5708
 script = ExtResource("3_c5apd")
 angle_deg = 45
-ray_count = 200
-max_distance = 750.0
+max_distance = 375.0
 collision_layer_mask = 131
 write_collision_polygon = NodePath("Area2D/CollisionPolygon2D")
 write_polygon2d = NodePath("Polygon2D")
+minimum_recalculate_time_msec = 17
+recalculate_if_static = false
 metadata/_custom_type_script = "uid://bo744wpycscqd"
 
 [node name="Area2D" type="Area2D" parent="TurretBody/VisionCone2D"]

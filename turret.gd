@@ -32,16 +32,16 @@ func _physics_process(delta):
 		else:
 			cube_blocking = false
 	
-	if main_node.type == 0 and player.dead == false \
-	or main_node.type == 1 and player.dead == true:
+	if main_node.type == 0 and not player.dead \
+	or main_node.type == 1 and player.dead:
 		correct_type = true
 	else:
 		correct_type = false
 	
 	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("IsInWall") \
-	and cube_blocking == false \
-	and correct_type == true:
-		if zappy_played == false:
+	and not cube_blocking \
+	and correct_type:
+		if not zappy_played:
 			$zappy_zap.play()
 			zappy_played = true
 		$VisionCone2D/Polygon2D.color = Color("#0000007a")
@@ -66,7 +66,7 @@ func _physics_process(delta):
 				$death_ray/collider.global_rotation = angle_to_target
 		#print("The player is visible")
 	else:
-		zappy_played == false
+		zappy_played = false
 		$VisionCone2D/Polygon2D.color = Color("#7c7c7c7a")
 		$death_ray.visible = false
 		$death_ray/living.visible = false
@@ -80,7 +80,7 @@ func _physics_process(delta):
 	elif main_node.type == 1:
 		$AnimatedSprite2D.play(&"ghost")
 	
-	if !has_touched_ground:
+	if !has_touched_ground and !main_node.gravity:
 		move_and_slide()
 		if is_on_floor():
 			has_touched_ground = true

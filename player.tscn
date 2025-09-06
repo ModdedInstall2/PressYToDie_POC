@@ -265,6 +265,7 @@ autoplay = "blank"
 shape = SubResource("CapsuleShape2D_nvl01")
 
 [node name="JumpDir" type="RayCast2D" parent="CharacterBody2D/Collision"]
+enabled = false
 
 [node name="DeathTimer" type="Timer" parent="CharacterBody2D"]
 wait_time = 10.0
@@ -308,7 +309,6 @@ collision_mask = 32777
 shape = SubResource("RectangleShape2D_nvl01")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-visible = false
 
 [node name="IsInWall" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 257
@@ -329,7 +329,5 @@ animation = &"ragdoll"
 
 [node name="Collision" type="CollisionShape2D" parent="Ragdoll"]
 shape = SubResource("CapsuleShape2D_nvl01")
-
-[node name="JumpDir" type="RayCast2D" parent="Ragdoll/Collision"]
 
 [connection signal="timeout" from="CharacterBody2D/DeathTimer" to="CharacterBody2D" method="_on_timer_timeout"]

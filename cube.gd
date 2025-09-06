@@ -19,9 +19,9 @@ func _physics_process(delta: float) -> void:
 			set_collision_layer_value(1, false)
 			set_collision_layer_value(8, false)
 			if get_node(str(player.get_path()) + "/AnimatedSprite2D").flip_h == false:
-				global_position.x = player.global_position.x + 30
+				global_position.x = player.global_position.x + 15
 			elif get_node(str(player.get_path()) + "/AnimatedSprite2D").flip_h == true:
-				global_position.x = player.global_position.x - 30
+				global_position.x = player.global_position.x - 15
 			global_position.y = player.global_position.y
 		else:
 			grabbed = false

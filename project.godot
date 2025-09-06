@@ -22,6 +22,8 @@ Hud="*res://hud.tscn"
 
 [display]
 
+window/size/viewport_width=576
+window/size/viewport_height=324
 window/size/mode=3
 window/size/resizable=false
 window/size/extend_to_title=true
@@ -131,3 +133,4 @@ save={
 textures/canvas_textures/default_texture_filter=3
 renderer/rendering_method="mobile"
 environment/defaults/default_clear_color=Color(1, 1, 1, 1)
+occlusion_culling/use_occlusion_culling=true

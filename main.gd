@@ -61,10 +61,7 @@ func load_game():
 		for i in len(level_data.button_map_2):
 			if $level/btns/button2.get_cell_atlas_coords(level_data.button_map_2[i]) \
 				in [Vector2i(2, 3)]:
-				if level_data.button_map_2[i] in $level.permaCells2:
-					$level/btns/button2.set_cell(level_data.button_map_2[i], 0, Vector2i(2, 2))
-					$level.permaButtons2[i] = 0
-				elif level_data.button_map_2[i] in $level.tempCells2:
+				if level_data.button_map_2[i] in $level.tempCells2:
 					$level/btns/button2.set_cell(level_data.button_map_2[i], 0, Vector2i(0, 3))
 					$level.tempButtons2[i - len($level.permaButtons2)] = 0
 				print(level_data.button_map_2[i])
