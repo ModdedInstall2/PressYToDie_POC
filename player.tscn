@@ -248,7 +248,7 @@ height = 28.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvl01"]
 size = Vector2(20, 34.3969)
 
-[node name="player" type="Node2D" groups=["Persist"]]
+[node name="player" type="Node2D"]
 script = ExtResource("1_b26j0")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Cube And Button Based Testing", "Lethal Military Android Targeting", "Test Subject 234"]]
@@ -307,8 +307,6 @@ collision_mask = 32777
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerArea"]
 shape = SubResource("RectangleShape2D_nvl01")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
 [node name="IsInWall" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 257

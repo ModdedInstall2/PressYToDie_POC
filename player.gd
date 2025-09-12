@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 150.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 125.0
+const JUMP_VELOCITY = -250+.0
 @onready var doubleJump := 0
 @onready var slope := 0
 @onready var dash := 0

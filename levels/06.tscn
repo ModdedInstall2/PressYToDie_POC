@@ -106,7 +106,7 @@ font_color = Color(0, 0, 0, 1)
 font = ExtResource("9_i2t4f")
 font_color = Color(0, 0, 0, 1)
 
-[node name="level" type="Node2D" groups=["Persist"]]
+[node name="06" type="Node2D"]
 script = ExtResource("1_0b4ue")
 
 [node name="connections" type="TileMapLayer" parent="."]

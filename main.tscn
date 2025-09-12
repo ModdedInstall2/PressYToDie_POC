@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://vgnlfhehq7yw" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dh7a2y0b121b7" path="res://player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://caohi1ntwjsxe" path="res://level.tscn" id="2_0xm2m"]
 [ext_resource type="AudioStream" uid="uid://dlv80pwlt60nm" path="res://Fallen Down - Toby Fox.ogg" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://kp3bb8hwowpr" path="res://levels/00.tscn" id="3_lquwl"]
 
-[node name="Main" type="Node2D" groups=["Persist"]]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_1bvp3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -14,9 +14,12 @@ parameters/looping = true
 
 [node name="levels" type="Node2D" parent="."]
 
-[node name="level" parent="." instance=ExtResource("2_0xm2m")]
-scale = Vector2(1.35, 1.35)
+[node name="00" parent="levels" instance=ExtResource("3_lquwl")]
+sprite_entered_from_right = 0
+permaButtons = Array[int]([])
+permaCells = Array[int]([])
+permaLights = Array[int]([])
 
 [node name="player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(967, 229)
-scale = Vector2(1.25, 1.25)
+scale = Vector2(0.926, 0.926)
