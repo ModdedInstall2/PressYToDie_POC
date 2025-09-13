@@ -49,6 +49,7 @@ points = PackedVector2Array(0, 0.5, 0, 0.5, 0, -0.5, 0, -0.5)
 script = ExtResource("1_coqkk")
 
 [node name="TurretBody" type="CharacterBody2D" parent="." groups=["Lethal Military Android Targeting", "Lethal Military Androids"]]
+collision_layer = 3
 script = ExtResource("1_3oylf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TurretBody"]
@@ -93,7 +94,6 @@ collision_mask = 262147
 shape = SubResource("ConvexPolygonShape2D_coqkk")
 
 [node name="death_ray" type="Area2D" parent="TurretBody"]
-visible = false
 position = Vector2(7.00464, -6.0319)
 
 [node name="living" type="Line2D" parent="TurretBody/death_ray"]

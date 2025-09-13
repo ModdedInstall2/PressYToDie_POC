@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 125.0
-const JUMP_VELOCITY = -250+.0
+const SPEED = 120.0
+const JUMP_VELOCITY = -260.0
 @onready var doubleJump := 0
 @onready var slope := 0
 @onready var dash := 0
@@ -9,13 +9,16 @@ const JUMP_VELOCITY = -250+.0
 @onready var jumpedOffSlope := 0
 @onready var really_dead := false
 @export var sprite : Node
-@onready var main_node := get_parent().get_parent()
+@onready var main_node := get_tree().get_first_node_in_group("Testing Facility")
 @onready var ragdoll := get_parent().get_node("Ragdoll")
 @onready var in_wall := false
 
 func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")
 	set_collision_layer_value(16, true)
+	set_collision_mask_value(1, true)
+	set_collision_mask_value(2, false)
+	set_collision_mask_value(3, true)
 
 func _physics_process(delta: float) -> void:
 	if not dead:
@@ -152,7 +155,8 @@ func _physics_process(delta: float) -> void:
 			if sprite.animation == &"walk":
 				$sfx/walk.stop()
 				sprite.stop()
-		move_and_slide()
+		if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+			move_and_slide()
 		if is_on_floor():
 			dash = 0
 		if not sprite.is_playing() or sprite.animation == &"die":
@@ -205,8 +209,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				velocity.y = move_toward(velocity.y, 0, SPEED)
-			
-		move_and_slide()
+		
+		if not str($PlayerArea.get_overlapping_areas()).contains("water"):
+			move_and_slide()
 		
 		if really_dead == false:
 			ragdoll.visible = true
@@ -263,10 +268,6 @@ func really_die():
 	$"sfx/really-die".play()
 	$AnimatedSprite2D.play(&"really_die")
 	await $AnimatedSprite2D.animation_finished
-	$AnimatedSprite2D.play("blank")
-	$DeathTimer.start(1.0)
-	Hud.transition()
-	await Hud.on_transition_finished
-	really_dead = false
-	dead = false
+	get_parent().queue_free()
 	main_node.load_game()
+	#self.queue_free()

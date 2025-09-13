@@ -5,6 +5,10 @@ extends CharacterBody2D
 @onready var node = get_parent()
 
 func _physics_process(delta: float) -> void:
+	if player and player.really_dead:
+		await Hud.on_transition_finished
+		get_parent().queue_free()
+	
 	if node.plane == 0:
 		$Sprite.play(&"alive")
 		motion_mode = MOTION_MODE_GROUNDED

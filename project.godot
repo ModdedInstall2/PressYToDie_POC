@@ -23,7 +23,7 @@ Hud="*res://hud.tscn"
 [display]
 
 window/size/viewport_width=464
-window/size/viewport_height=256
+window/size/viewport_height=260
 window/size/mode=3
 window/size/resizable=false
 window/size/extend_to_title=true
@@ -47,6 +47,7 @@ enabled=PackedStringArray("res://addons/magic_button/plugin.cfg", "res://addons/
 "Lethal Military Android Targeting"=""
 "Test Subject 234"=""
 "Lethal Military Androids"=""
+"Testing Facility"=""
 
 [input]
 

@@ -13,7 +13,7 @@ extends Node2D
 @export var tempCells2 : Array[Vector2i]
 @export var tempLights2 : Array[Vector2i]
 @export var tempDoors2 : Array[Vector2i]
-@onready var cubes = 1
+@export var cubes = 0
 @export var level_data:LevelData
 @onready var saving := false
 @onready var player : Node = get_tree().get_first_node_in_group("Test Subject 234")
