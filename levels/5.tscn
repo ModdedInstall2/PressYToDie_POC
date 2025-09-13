@@ -26,6 +26,10 @@ size = Vector2(12, 1.52618)
 
 [node name="5" type="Node2D"]
 script = ExtResource("1_0b4ue")
+tempButtons = Array[int]([0])
+tempCells = Array[Vector2i]([Vector2i(13, 14)])
+tempLights = Array[Vector2i]([Vector2i(27, 5)])
+tempDoors = [[Vector2i(28, 6), Vector2i(28, 7)]]
 
 [node name="connections" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAQAAUAAAABAAAAAAARAAUAAAABAAAAAAASAAUAAAABAAAAAAATAAUAAAABAAAAAAAUAAUAAAABAAAAAAAVAAUAAAABAAAAAAAWAAUAAAABAAAAAAAXAAUAAAABAAAAAAAYAAUAAAABAAAAAAAZAAUAAAABAAAAAAAaAAUAAAABAAAAAAAbAAUAAAABAAAAAAANAA4AAAAAAAAAAAANAA0AAAAAAAAAAAANAAwAAAAAAAAAAAANAAsAAAAAAAAAAAANAAkAAAAAAAAAAAANAAgAAAAAAAAAAAANAAcAAAAAAAAAAAANAAYAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAUAAAABAAAAAAAPAAUAAAABAAAAAAANAAUAAAACAAAAAAA=")
@@ -97,4 +101,4 @@ stream = ExtResource("5_f2txt")
 [node name="decals" type="Node2D" parent="."]
 
 [node name="player" parent="." instance=ExtResource("7_ymyy0")]
-position = Vector2(12.3158, 109.816)
+position = Vector2(16.3711, 109.816)

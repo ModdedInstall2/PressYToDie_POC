@@ -22,8 +22,8 @@ Hud="*res://hud.tscn"
 
 [display]
 
-window/size/viewport_width=464
-window/size/viewport_height=260
+window/size/viewport_width=473
+window/size/viewport_height=264
 window/size/mode=3
 window/size/resizable=false
 window/size/extend_to_title=true

@@ -1,17 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bro3nwk2rxw57"]
+[gd_scene load_steps=3 format=3 uid="uid://bro3nwk2rxw57"]
 
 [ext_resource type="Script" uid="uid://vgnlfhehq7yw" path="res://main.gd" id="1_1bvp3"]
-[ext_resource type="AudioStream" uid="uid://dlv80pwlt60nm" path="res://Fallen Down - Toby Fox.ogg" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(211, 320)
+size = Vector2(207, 320)
 
 [node name="Main" type="Node2D" groups=["Testing Facility"]]
 script = ExtResource("1_1bvp3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_h2yge")
-parameters/looping = true
 
 [node name="load_triggers" type="Node2D" parent="."]
 
@@ -19,7 +16,7 @@ parameters/looping = true
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="load_triggers/left"]
-position = Vector2(-106.5, 138)
+position = Vector2(-108.5, 138)
 shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="right" type="Area2D" parent="load_triggers"]

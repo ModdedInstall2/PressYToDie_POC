@@ -3,7 +3,7 @@ extends Node2D
 var save := "user://ddm.sav"
 @onready var Player:Node = get_tree().get_first_node_in_group("Test Subject 234")
 #@onready var Level:Node = $level
-@export_range (0, 19) var current_level:int = 4
+@export_range (0, 19) var current_level:int = 8
 @export_range (0, 2) var entered_from:int = 1
 @onready var active:bool = false
 @onready var loading:bool = false
