@@ -1,15 +1,32 @@
 extends Node2D
 
+# When testing == true, the game doesn't load your save file,
+# and instead loads whatever level is listed in "current_level",
+# because it was kind of important for me to test the game on
+# a per-level basis while I was rewriting the whole level system.
+var testing = false
 var save := "user://ddm.sav"
-@onready var Player:Node = get_tree().get_first_node_in_group("Test Subject 234")
-#@onready var Level:Node = $level
+
 @export_range (0, 19) var current_level:int = 8
 @export_range (0, 2) var entered_from:int = 1
+
+#@onready var Level:Node = $level
+@onready var Player:Node = get_tree().get_first_node_in_group("Test Subject 234")
 @onready var active:bool = false
 @onready var loading:bool = false
 
 func _ready() -> void:
 	Engine.max_fps = 60
+	if !testing:
+		current_level = 1
+	
+	# Little fail-safe to create the save file if it doesn't exist
+	# Technically, the game already does this when it saves, and
+	# it saves right when you open the game for the first time - 
+	# but I figured, better safe than sorry
+	if not FileAccess.file_exists(save):
+		var create_save = FileAccess.open(save, FileAccess.WRITE)
+		create_save.close()
 
 func _physics_process(delta: float) -> void:
 	# Check if we need to load the game or not
@@ -38,6 +55,10 @@ func _physics_process(delta: float) -> void:
 
 func save_game():
 	# Shiny new saving code fit for the new system!
+	if not FileAccess.file_exists(save):
+		print("Save file doesn't exist")
+		return
+	
 	var save_file = FileAccess.open(save, FileAccess.WRITE)
 	var save_string = JSON.stringify({"level": current_level})
 	save_file.store_line(save_string)
@@ -74,8 +95,10 @@ func load_game():
 		active = true
 		save_game()
 		#load_game()
-	elif !active:
+		loading = false
+	elif !testing:
 		if not FileAccess.file_exists(save):
+			print("Save file doesn't exist")
 			return
 		
 		var save_file = FileAccess.open(save, FileAccess.READ)
