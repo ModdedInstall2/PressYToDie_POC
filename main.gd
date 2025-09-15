@@ -7,7 +7,7 @@ extends Node2D
 var testing = true
 var save := "user://ddm.sav"
 
-@export_range (0, 19) var current_level:int = 0
+@export_range (0, 19) var current_level:int = 1
 @export_range (0, 2) var entered_from:int = 1
 
 #@onready var Level:Node = $level

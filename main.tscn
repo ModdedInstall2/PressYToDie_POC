@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bro3nwk2rxw57"]
+[gd_scene load_steps=4 format=3 uid="uid://bro3nwk2rxw57"]
 
 [ext_resource type="Script" uid="uid://vgnlfhehq7yw" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://bf6l1phgwhy0s" path="res://music/bgm_a.ogg" id="2_0xm2m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(207, 320)
@@ -9,6 +10,9 @@ size = Vector2(207, 320)
 script = ExtResource("1_1bvp3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0xm2m")
+volume_db = -5.0
+autoplay = true
 
 [node name="load_triggers" type="Node2D" parent="."]
 

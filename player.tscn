@@ -273,12 +273,12 @@ one_shot = true
 
 [node name="walk" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("4_hqtel")
-volume_db = 5.0
+volume_db = 7.0
 playback_type = 1
 
 [node name="jump" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("5_sweqy")
-volume_db = -20.0
+volume_db = -18.0
 
 [node name="dash" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("6_2hs0m")
@@ -286,10 +286,12 @@ volume_db = -10.0
 
 [node name="die" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("7_1jxqw")
+volume_db = -5.0
 pitch_scale = 1.62
 
 [node name="live" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("7_1jxqw")
+volume_db = -5.0
 
 [node name="really-die" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("9_b26j0")
