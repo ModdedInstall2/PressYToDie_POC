@@ -25,3 +25,6 @@ unique_name_in_owner = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="load_triggers/right"]
 position = Vector2(571, 138)
 shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="levels" type="Node2D" parent="."]
+unique_name_in_owner = true

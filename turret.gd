@@ -20,7 +20,8 @@ func _ready():
 	target = find_target()
 	$death_ray/living.visible = false
 	$death_ray/dead.visible = false
-	$death_ray.monitorable = false
+	$death_ray.visible = false
+	$death_ray/collider.disabled = true
 
 func _physics_process(delta):
 	if player and player.really_dead \
@@ -30,7 +31,7 @@ func _physics_process(delta):
 	
 	if target != null:
 		angle_to_target = global_position.direction_to(target.global_position).angle()
-		$Area2D/CollisionShape2D.scale.x = target.position.x + 50.0/2
+		$Area2D/CollisionShape2D.scale.x = 500
 		$Area2D/CollisionShape2D.global_rotation = angle_to_target
 		
 		if str($Area2D.get_overlapping_areas()).contains("Cube"):
@@ -52,15 +53,19 @@ func _physics_process(delta):
 			$zappy_zap.play()
 			zappy_played = true
 		$VisionCone2D/Polygon2D.color = Color("#0000007a")
-		$death_ray.monitorable = true
+		$death_ray.visible = true
+		$death_ray/collider.disabled = false
 		if main_node.type == 0:
 			$death_ray/living.visible = true
 			$death_ray/dead.visible = false
 			if target != null:
-				$death_ray/living.points[1].x = (target.position.x) + 30
+				#$death_ray/living.points[1].x = (0 - target.position.x) + 60
+				$death_ray/living.points[1].x = 500
 				$death_ray/living.global_rotation = angle_to_target
-				$death_ray/collider.shape.points[1].x = (target.position.x) + 30
-				$death_ray/collider.shape.points[2].x = (target.position.x) + 30
+				#$death_ray/collider.shape.points[1].x = (0 - target.position.x) + 60
+				#$death_ray/collider.shape.points[2].x = (0 - target.position.x) + 60
+				$death_ray/collider.shape.points[1].x = 500
+				$death_ray/collider.shape.points[2].x = 500
 				$death_ray/collider.global_rotation = angle_to_target
 		elif main_node.type == 1:
 			$death_ray/living.visible = false
@@ -73,9 +78,10 @@ func _physics_process(delta):
 				$death_ray/collider.global_rotation = angle_to_target
 		#print("The player is visible")
 	else:
+		$death_ray/collider.disabled = true
 		zappy_played = false
 		$VisionCone2D/Polygon2D.color = Color("#7c7c7c7a")
-		$death_ray.monitorable = false
+		$death_ray.visible = false
 		$death_ray/living.visible = false
 		$death_ray/dead.visible = false
 		#print("The player is not visible")

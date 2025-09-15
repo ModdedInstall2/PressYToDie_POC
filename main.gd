@@ -4,10 +4,10 @@ extends Node2D
 # and instead loads whatever level is listed in "current_level",
 # because it was kind of important for me to test the game on
 # a per-level basis while I was rewriting the whole level system.
-var testing = false
+var testing = true
 var save := "user://ddm.sav"
 
-@export_range (0, 19) var current_level:int = 8
+@export_range (0, 19) var current_level:int = 0
 @export_range (0, 2) var entered_from:int = 1
 
 #@onready var Level:Node = $level
@@ -16,7 +16,12 @@ var save := "user://ddm.sav"
 @onready var loading:bool = false
 
 func _ready() -> void:
-	Engine.max_fps = 60
+	# Set frame rate based on if it's web or not
+	if OS.get_name() == "web":
+		Engine.max_fps = 60
+	else:
+		Engine.max_fps = 60
+	
 	if !testing:
 		current_level = 1
 	
@@ -26,6 +31,8 @@ func _ready() -> void:
 	# but I figured, better safe than sorry
 	if not FileAccess.file_exists(save):
 		var create_save = FileAccess.open(save, FileAccess.WRITE)
+		var save_string = JSON.stringify({"level": 1})
+		create_save.store_line(save_string)
 		create_save.close()
 
 func _physics_process(delta: float) -> void:
@@ -58,6 +65,9 @@ func save_game():
 	if not FileAccess.file_exists(save):
 		print("Save file doesn't exist")
 		return
+	elif not OS.is_userfs_persistent():
+		print("Can't write save file")
+		return
 	
 	var save_file = FileAccess.open(save, FileAccess.WRITE)
 	var save_string = JSON.stringify({"level": current_level})
@@ -74,8 +84,8 @@ func load_game():
 	# Shiny new loading code fit for multiple maps!
 	Hud.transition()
 	await Hud.on_transition_finished
-	if get_node(str(current_level)):
-		get_node(str(current_level)).queue_free()
+	for i in %levels.get_child_count():
+		get_node("levels/" + str(%levels.get_child(i))).queue_free()
 	if active:
 		if entered_from == 0:
 			current_level -= 1
@@ -84,7 +94,8 @@ func load_game():
 		
 		var new_level = load("res://levels/" + str(current_level) + ".tscn")
 		var instantized = new_level.instantiate()
-		add_child(instantized)
+		instantized.name = str(current_level)
+		%levels.add_child(instantized)
 		#if get_node(str(current_level)):
 			#if str(get_node(str(current_level)).get_property_list()).contains("sprite_entered_from"):
 				#get_node(str(current_level)).sprite_entered_from = entered_from
@@ -100,6 +111,9 @@ func load_game():
 		if not FileAccess.file_exists(save):
 			print("Save file doesn't exist")
 			return
+		elif not OS.is_userfs_persistent():
+			print("Can't read save file")
+			return
 		
 		var save_file = FileAccess.open(save, FileAccess.READ)
 		while save_file.get_position() < save_file.get_length():
@@ -114,6 +128,7 @@ func load_game():
 			var current_level = load_data["level"]
 			var new_level = load("res://levels/" + str(current_level) + ".tscn")
 			var instantized  = new_level.instantiate()
+			instantized.name = str(current_level)
 			add_child(instantized)
 		save_game()
 	else:

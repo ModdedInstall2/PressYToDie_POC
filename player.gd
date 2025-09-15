@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 				really_dead = true
 				dead = true
 				sprite.play(&"fade", 10)
-				await sprite.animation_finished
+				#await sprite.animation_finished
 				really_die()
 		elif sprite.animation == &"fade":
 			sprite.stop()
@@ -265,9 +265,11 @@ func _on_timer_timeout() -> void:
 		$DeathTimer.start(1.0)
 
 func really_die():
+	if $AnimatedSprite2D.is_playing():
+		await $AnimatedSprite2D.animation_finished
 	$"sfx/really-die".play()
 	$AnimatedSprite2D.play(&"really_die")
 	await $AnimatedSprite2D.animation_finished
 	get_parent().queue_free()
 	main_node.load_game()
-	#self.queue_free()
+	self.queue_free()
