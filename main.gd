@@ -18,7 +18,7 @@ var save := "user://ddm.sav"
 func _ready() -> void:
 	# Set frame rate based on if it's web or not
 	if OS.get_name() == "web":
-		Engine.max_fps = 60
+		Engine.max_fps = 30
 	else:
 		Engine.max_fps = 60
 	
