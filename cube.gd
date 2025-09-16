@@ -3,10 +3,11 @@ extends CharacterBody2D
 @onready var player : Node = get_tree().get_first_node_in_group("Test Subject 234")
 @onready var grabbed = false
 @onready var node = get_parent()
+@onready var scene_root = get_tree().root
 
 func _physics_process(delta: float) -> void:
 	if player and player.really_dead:
-		await Hud.on_transition_finished
+		await get_node(str(scene_root) + "/hud").on_transition_finished
 		get_parent().queue_free()
 		self.queue_free()
 	

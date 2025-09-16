@@ -43,7 +43,7 @@ height = 24.0
 points = PackedVector2Array(0, -0.5, 1, -0.5, 1, 0.5, 0, 0.5)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_mhatg"]
-points = PackedVector2Array(0, 500, 0, 500, 0, -500, 0, -500)
+points = PackedVector2Array(0, 1, 0, 1, 0, -1, 0, -1)
 
 [node name="turret" type="Node2D"]
 script = ExtResource("1_coqkk")
@@ -70,7 +70,7 @@ position = Vector2(6.99698, -6.03302)
 rotation = -1.5708
 script = ExtResource("3_c5apd")
 angle_deg = 45
-max_distance = 300.0
+max_distance = 600.0
 collision_layer_mask = 131
 write_collision_polygon = NodePath("Area2D/CollisionPolygon2D")
 write_polygon2d = NodePath("Polygon2D")
@@ -111,7 +111,6 @@ texture_mode = 1
 
 [node name="collider" type="CollisionShape2D" parent="TurretBody/death_ray"]
 shape = SubResource("ConvexPolygonShape2D_mhatg")
-disabled = true
 
 [node name="zappy_zap" type="AudioStreamPlayer2D" parent="TurretBody"]
 stream = ExtResource("7_vt3mo")

@@ -7,7 +7,7 @@ extends Node2D
 var testing = true
 var save := "user://ddm.sav"
 
-@export_range (0, 19) var current_level:int = 1
+@export_range (0, 19) var current_level:int = 10
 @export_range (0, 2) var entered_from:int = 1
 
 #@onready var Level:Node = $level
@@ -35,6 +35,7 @@ func _ready() -> void:
 		create_save.store_line(save_string)
 		create_save.close()
 
+@warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	# Check if we need to load the game or not
 	if !active:
@@ -82,8 +83,8 @@ func save_game():
 
 func load_game():
 	# Shiny new loading code fit for multiple maps!
-	Hud.transition()
-	await Hud.on_transition_finished
+	$hud.transition()
+	await $hud.on_transition_finished
 	for i in %levels.get_child_count():
 		get_node("levels/" + str(%levels.get_child(i))).queue_free()
 	if active:
@@ -125,6 +126,7 @@ func load_game():
 				continue
 			
 			var load_data = json.data
+			@warning_ignore("shadowed_variable")
 			var current_level = load_data["level"]
 			var new_level = load("res://levels/" + str(current_level) + ".tscn")
 			var instantized  = new_level.instantiate()

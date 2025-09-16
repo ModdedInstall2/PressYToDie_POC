@@ -17,10 +17,6 @@ config/features=PackedStringArray("4.5")
 run/max_fps=60
 config/icon="res://icon.svg"
 
-[autoload]
-
-Hud="*res://hud.tscn"
-
 [display]
 
 window/size/viewport_width=473
@@ -46,9 +42,9 @@ enabled=PackedStringArray("res://addons/magic_button/plugin.cfg", "res://addons/
 
 "Cube And Button Based Testing"=""
 "Lethal Military Android Targeting"=""
-"Test Subject 234"=""
 "Lethal Military Androids"=""
 "Testing Facility"=""
+"Test Subject 234"=""
 
 [input]
 

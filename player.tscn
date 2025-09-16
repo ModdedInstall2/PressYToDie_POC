@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dh7a2y0b121b7"]
+[gd_scene load_steps=39 format=3 uid="uid://dh7a2y0b121b7"]
 
 [ext_resource type="Texture2D" uid="uid://ckpem2av7s4r7" path="res://player-sprites.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c325hj2e4vlso" path="res://player_main.gd" id="1_b26j0"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cvxq0e5clwl7b" path="res://sfx/die.wav" id="7_1jxqw"]
 [ext_resource type="AudioStream" uid="uid://c7yrqj35gn4k0" path="res://sfx/really_die.wav" id="9_b26j0"]
 [ext_resource type="AudioStream" uid="uid://brvu66llp162f" path="res://sfx/save_yourself.mp3" id="11_nvl01"]
+[ext_resource type="AudioStream" uid="uid://c7nwq1w32763e" path="res://sfx/frozen.wav" id="12_ivps1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jm5j8"]
 atlas = ExtResource("3_n7ghd")
@@ -299,6 +300,10 @@ stream = ExtResource("9_b26j0")
 [node name="save-yourself" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
 stream = ExtResource("11_nvl01")
 volume_db = 24.0
+
+[node name="frozen" type="AudioStreamPlayer2D" parent="CharacterBody2D/sfx"]
+stream = ExtResource("12_ivps1")
+volume_db = -10.0
 
 [node name="PlayerArea" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 32777

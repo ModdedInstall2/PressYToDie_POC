@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnpfcli0qnbyo"]
+[gd_scene load_steps=8 format=3 uid="uid://cnpfcli0qnbyo"]
 
 [ext_resource type="Script" uid="uid://cj1wt88cfgbbp" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="FontFile" uid="uid://o1im8dg24ckm" path="res://ui_assets/fonts/Kenney Pixel.ttf" id="2_64ctp"]
 
 [sub_resource type="Animation" id="Animation_8sq4i"]
 length = 0.001
@@ -58,6 +59,17 @@ _data = {
 &"fade_out": SubResource("Animation_64ctp")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_8sq4i"]
+font = ExtResource("2_64ctp")
+font_color = Color(0, 0, 0, 1)
+stacked_outline_count = 1
+stacked_shadow_count = 1
+stacked_outline_0/size = 3
+stacked_outline_0/color = Color(1, 1, 1, 1)
+stacked_shadow_0/offset = Vector2(0, 0)
+stacked_shadow_0/color = Color(0, 0, 0, 0.7607843)
+stacked_shadow_0/outline_size = 10
+
 [node name="hud" type="CanvasLayer"]
 script = ExtResource("1_37p78")
 
@@ -78,3 +90,16 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_a2258")
 }
+
+[node name="timer" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="timer"]
+offset_left = 4.0
+offset_top = 249.0
+offset_right = 44.0
+offset_bottom = 272.0
+text = "10"
+label_settings = SubResource("LabelSettings_8sq4i")
+
+[node name="Timer" type="Timer" parent="timer"]
+wait_time = 10.0

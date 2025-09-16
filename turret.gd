@@ -21,12 +21,12 @@ func _ready():
 	$death_ray/living.visible = false
 	$death_ray/dead.visible = false
 	$death_ray.visible = false
-	$death_ray/collider.disabled = true
+	$death_ray/collider.visible = false
 
 func _physics_process(delta):
 	if player and player.really_dead \
 	and !scene_root.loading:
-		await Hud.on_transition_finished
+		await get_node(str(scene_root) + "/hud").on_transition_finished
 		main_node.queue_free()
 	
 	if target != null:
@@ -46,7 +46,7 @@ func _physics_process(delta):
 		else:
 			correct_type = false
 	
-	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("IsInWall") \
+	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("PlayerArea") \
 	and not cube_blocking \
 	and correct_type:
 		if not zappy_played:
@@ -54,36 +54,40 @@ func _physics_process(delta):
 			zappy_played = true
 		$VisionCone2D/Polygon2D.color = Color("#0000007a")
 		$death_ray.visible = true
-		$death_ray/collider.disabled = false
+		$death_ray/collider.visible = true
 		if main_node.type == 0:
 			$death_ray/living.visible = true
 			$death_ray/dead.visible = false
 			if target != null:
-				#$death_ray/living.points[1].x = (0 - target.position.x) + 60
-				$death_ray/living.points[1].x = 500
+				$death_ray/living.points[1].x = (0 - target.position.x) + 60
+				#$death_ray/living.points[1].x = 500
 				$death_ray/living.global_rotation = angle_to_target
-				#$death_ray/collider.shape.points[1].x = (0 - target.position.x) + 60
-				#$death_ray/collider.shape.points[2].x = (0 - target.position.x) + 60
-				$death_ray/collider.shape.points[1].x = 500
-				$death_ray/collider.shape.points[2].x = 500
+				$death_ray/collider.shape.points[1].x = (0 - target.position.x) + 60
+				$death_ray/collider.shape.points[2].x = (0 - target.position.x) + 60
+				#$death_ray/collider.shape.points[1].x = 500
+				#$death_ray/collider.shape.points[2].x = 500
 				$death_ray/collider.global_rotation = angle_to_target
 		elif main_node.type == 1:
 			$death_ray/living.visible = false
 			$death_ray/dead.visible = true
 			if target != null:
-				$death_ray/dead.points[1].x = (0 - target.position.x) + 30
+				$death_ray/dead.points[1].x = (target.position.x) + 60
+				#$death_ray/dead.points[1].x = 500
 				$death_ray/dead.global_rotation = angle_to_target
-				$death_ray/collider.shape.points[1].x = (0 - target.position.x) + 30
-				$death_ray/collider.shape.points[2].x = (0 - target.position.x) + 30
+				$death_ray/collider.shape.points[1].x = (target.position.x) + 60
+				$death_ray/collider.shape.points[2].x = (target.position.x) + 60
+				#$death_ray/collider.shape.points[1].x = 500
+				#$death_ray/collider.shape.points[2].x = 500
 				$death_ray/collider.global_rotation = angle_to_target
 		#print("The player is visible")
 	else:
-		$death_ray/collider.disabled = true
+		$death_ray/collider.visible = false
 		zappy_played = false
 		$VisionCone2D/Polygon2D.color = Color("#7c7c7c7a")
 		$death_ray.visible = false
 		$death_ray/living.visible = false
 		$death_ray/dead.visible = false
+		$death_ray/collider.global_rotation = 0
 		#print("The player is not visible")
 	
 	if not is_on_floor():
