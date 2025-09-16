@@ -7,7 +7,7 @@ extends Node2D
 var testing = true
 var save := "user://ddm.sav"
 
-@export_range (0, 19) var current_level:int = 10
+@export_range (0, 19) var current_level:int = 1
 @export_range (0, 2) var entered_from:int = 1
 
 #@onready var Level:Node = $level
@@ -21,6 +21,8 @@ func _ready() -> void:
 		Engine.max_fps = 30
 	else:
 		Engine.max_fps = 60
+	await get_tree().create_timer(1.0).timeout
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	
 	if !testing:
 		current_level = 1

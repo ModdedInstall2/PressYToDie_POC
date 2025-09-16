@@ -22,8 +22,25 @@ func _ready():
 	$death_ray/dead.visible = false
 	$death_ray.visible = false
 	$death_ray/collider.visible = false
+	
+	if main_node.flip:
+		$AnimatedSprite2D.set_flip_h(1)
+		$Area2D.position.x = -7.0
+		$death_ray.position.x = -7.0
+		$VisionCone2D.position.x = -7.0
+		$VisionCone2D.rotation = 89.5
+	else:
+		$AnimatedSprite2D.set_flip_h(0)
+		$Area2D.position.x = 7.0
+		$death_ray.position.x = 7.0
+		$VisionCone2D.position.x = 7.0
+		$VisionCone2D.rotation = -89.5
 
 func _physics_process(delta):
+	if player.is_queued_for_deletion():
+		get_parent().queue_free()
+		self.queue_free()
+	
 	if player and player.really_dead \
 	and !scene_root.loading:
 		await get_node(str(scene_root) + "/hud").on_transition_finished
@@ -59,11 +76,11 @@ func _physics_process(delta):
 			$death_ray/living.visible = true
 			$death_ray/dead.visible = false
 			if target != null:
-				$death_ray/living.points[1].x = (0 - target.position.x) + 60
+				$death_ray/living.points[1].x = (0 + target.position.x) - 15
 				#$death_ray/living.points[1].x = 500
 				$death_ray/living.global_rotation = angle_to_target
-				$death_ray/collider.shape.points[1].x = (0 - target.position.x) + 60
-				$death_ray/collider.shape.points[2].x = (0 - target.position.x) + 60
+				$death_ray/collider.shape.points[1].x = (0 + target.position.x)
+				$death_ray/collider.shape.points[2].x = (0 + target.position.x)
 				#$death_ray/collider.shape.points[1].x = 500
 				#$death_ray/collider.shape.points[2].x = 500
 				$death_ray/collider.global_rotation = angle_to_target
@@ -71,16 +88,19 @@ func _physics_process(delta):
 			$death_ray/living.visible = false
 			$death_ray/dead.visible = true
 			if target != null:
-				$death_ray/dead.points[1].x = (target.position.x) + 60
+				$death_ray/dead.points[1].x = (0 + target.position.x) - 15
 				#$death_ray/dead.points[1].x = 500
 				$death_ray/dead.global_rotation = angle_to_target
-				$death_ray/collider.shape.points[1].x = (target.position.x) + 60
-				$death_ray/collider.shape.points[2].x = (target.position.x) + 60
+				$death_ray/collider.shape.points[1].x = (0 + target.position.x)
+				$death_ray/collider.shape.points[2].x = (0 + target.position.x)
 				#$death_ray/collider.shape.points[1].x = 500
 				#$death_ray/collider.shape.points[2].x = 500
 				$death_ray/collider.global_rotation = angle_to_target
+				TurretSignal.emit("gotcha")
 		#print("The player is visible")
 	else:
+		$death_ray/collider.shape.points[1].x = 0
+		$death_ray/collider.shape.points[2].x = 0
 		$death_ray/collider.visible = false
 		zappy_played = false
 		$VisionCone2D/Polygon2D.color = Color("#7c7c7c7a")

@@ -313,8 +313,8 @@ collision_mask = 32777
 shape = SubResource("RectangleShape2D_nvl01")
 
 [node name="IsInWall" type="Area2D" parent="CharacterBody2D"]
-collision_layer = 257
-collision_mask = 257
+collision_layer = 263
+collision_mask = 263
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/IsInWall"]
 position = Vector2(-0.0114937, -0.0139742)

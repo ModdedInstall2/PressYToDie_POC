@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 120.0
 const JUMP_VELOCITY = -260.0
-var frozen := false
+@onready var frozen := false
 @onready var doubleJump := 0
 @onready var slope := 0
 @onready var dash := 0
@@ -13,6 +13,7 @@ var frozen := false
 @onready var main_node := get_tree().get_first_node_in_group("Testing Facility")
 @onready var ragdoll := get_parent().get_node("Ragdoll")
 @onready var in_wall := false
+@onready var death_ray := get_node(str(get_tree().get_first_node_in_group("Lethal Military Androids")) + "/death_ray")
 
 func _ready() -> void:
 	sprite = get_node("AnimatedSprite2D")
@@ -20,6 +21,7 @@ func _ready() -> void:
 	set_collision_mask_value(1, true)
 	set_collision_mask_value(2, false)
 	set_collision_mask_value(3, true)
+	TurretSignal.connect("gotcha", _freeze())
 
 func _physics_process(delta: float) -> void:
 	if not dead:
@@ -30,13 +32,14 @@ func _physics_process(delta: float) -> void:
 		set_collision_mask_value(2, false)
 		set_collision_mask_value(3, true)
 		
-		if str($IsInWall.get_overlapping_areas()).contains("death_ray"):
-			# Fix a minor glitch with turrets
-			await get_tree().create_timer(0.05).timeout
+		#if str($IsInWall.get_overlapping_areas()).contains("death_ray"):
+			## Fix a minor glitch with turrets
+			#await get_tree().create_timer(0.05).timeout
 		
 		if str($IsInWall.get_overlapping_areas()).contains("water") \
 		or str($IsInWall.get_overlapping_areas()).contains("death_ray"):
 			if really_dead == false:
+				velocity = Vector2.ZERO
 				really_dead = true
 				dead = true
 				sprite.stop()
@@ -159,7 +162,8 @@ func _physics_process(delta: float) -> void:
 			if sprite.animation == &"walk":
 				$sfx/walk.stop()
 				sprite.stop()
-		if not str($IsInWall.get_overlapping_areas()).contains("water"):
+		if (not str($IsInWall.get_overlapping_areas()).contains("water")):
+		#or (not str($IsInWall.get_overlapping_areas().contains("death_ray"))):
 			move_and_slide()
 		if is_on_floor():
 			dash = 0
@@ -172,8 +176,14 @@ func _physics_process(delta: float) -> void:
 		ragdoll.position = position
 	
 	elif dead:
-		if str($IsInWall.get_overlapping_areas()).contains("death_ray"):
+		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+		if str($PlayerArea.get_overlapping_areas()).contains("death_ray"):
 			frozen = true
+			#print($PlayerArea.get_overlapping_areas())
+			#var areas:Array = $PlayerArea.get_overlapping_areas()
+			#if areas[0].get_parent().type == 1:
+				#frozen = true
+				#print("frozen")
 		#else:
 			#frozen = false
 			#motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
@@ -182,12 +192,12 @@ func _physics_process(delta: float) -> void:
 			#set_collision_mask_value(3, true)
 		
 		if frozen:
-			motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
-			set_collision_mask_value(1, true)
+			#motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
+			set_collision_mask_value(1, false)
 			set_collision_mask_value(2, true)
 			set_collision_mask_value(3, true)
 			if not is_on_floor():
-				velocity += get_gravity() * delta - $Collision/JumpDir.get_collision_normal()
+				velocity += get_gravity() * delta
 			if not $sfx/frozen.playing:
 				$sfx/frozen.play()
 		else:
@@ -195,11 +205,11 @@ func _physics_process(delta: float) -> void:
 			set_collision_mask_value(2, true)
 			set_collision_mask_value(3, true)
 			rotation = 0
-			motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+			#motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 			$sfx/frozen.stop()
 		
 		if not (str($IsInWall.get_overlapping_areas()).contains("water") \
-		or str($IsInWall.get_overlapping_areas()).contains("death_ray")):
+		or frozen):
 			sprite.play(&"die")
 		
 		if str($IsInWall.get_overlapping_areas()).contains("water") && \
@@ -210,22 +220,21 @@ func _physics_process(delta: float) -> void:
 		if not (str($IsInWall.get_overlapping_areas()).contains("water") \
 		or frozen):
 			var direction := Input.get_axis("left", "right")
-			var yDirection := Input.get_axis("down", "up")
+			var yDirection := Input.get_axis("up", "down")
 			if direction or yDirection:
 				if direction < 0:
 					sprite.set_flip_h(1)
-				else:
+				elif direction > 0:
 					sprite.set_flip_h(0)
 				velocity.x = direction * SPEED
-				velocity.y = -yDirection * SPEED
+				velocity.y = yDirection * SPEED
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				velocity.y = move_toward(velocity.y, 0, SPEED)
 		elif is_on_floor():
 			velocity = Vector2.ZERO
 		
-		if (not str($IsInWall.get_overlapping_areas()).contains("water")) and \
-		(!frozen or not is_on_floor()):
+		if (not str($IsInWall.get_overlapping_areas()).contains("water")):
 			move_and_slide()
 		
 		if really_dead == false:
@@ -283,6 +292,10 @@ func really_die():
 	$"sfx/really-die".play()
 	$AnimatedSprite2D.play(&"really_die")
 	await $AnimatedSprite2D.animation_finished
-	get_parent().queue_free()
 	main_node.load_game()
+	get_parent().queue_free()
 	self.queue_free()
+
+func _freeze():
+	frozen = true
+	#pass

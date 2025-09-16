@@ -2,6 +2,7 @@ extends Node2D
 
 @export_range (0, 1) var type : int
 @export var gravity : bool = true
+@export var flip := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
