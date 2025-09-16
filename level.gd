@@ -12,7 +12,7 @@ extends Node2D
 @export var tempButtons2 : Array[int]
 @export var tempCells2 : Array[Vector2i]
 @export var tempLights2 : Array[Vector2i]
-@export var tempDoors2 : Array[Vector2i]
+@export var tempDoors2 : Array
 @export var cubes = 0
 @export var level_data:LevelData
 @onready var saving := false
@@ -38,9 +38,9 @@ func _ready() -> void:
 	for i in range(len(tempButtons2)):
 		$btns/button2.set_cell(tempCells2[i], 0, Vector2i(0, 3))
 		$btns/button2.set_cell(tempLights2[i], 0, Vector2i(2, 1))
-#		var door := Array(tempDoors2[i])
-#		$door2.set_cell(door[0], 0, Vector2i(1, 2))
-#		$door2.set_cell(door[1], 0, Vector2i(0, 2))
+		var door := Array(tempDoors2[i])
+		$door2.set_cell(door[0], 0, Vector2i(1, 2))
+		$door2.set_cell(door[1], 0, Vector2i(0, 2))
 	for i in range(cubes):
 		level_data.cubes.append(get_node("cubes/" + str(i) + "/CubeBody").position)
 
@@ -85,14 +85,14 @@ func _process(delta: float) -> void:
 					tempButtons[i] = 0
 		for i in range(len(tempButtons2)):
 			var currentBtn := get_node("btns/tempTriggers/" + str(i))
-#			var door := Array(tempDoors2[i])
+			var door := Array(tempDoors2[i])
 			if currentBtn.get_overlapping_bodies() != []:
 				if tempButtons2[i] == 0:
 					$btns/click.play()
 					$btns/button2.set_cell(tempCells2[i], 0, Vector2i(1, 3))
 					$btns/button2.set_cell(tempLights2[i], 0, Vector2i(1, 1))
-#					$door2.set_cell(door[0], 0, Vector2i(3, 0))
-#					$door2.set_cell(door[1], 0, Vector2i(3, 1))
+					$door2.set_cell(door[0], 0, Vector2i(3, 0))
+					$door2.set_cell(door[1], 0, Vector2i(3, 1))
 					tempButtons2[i] = 1
 					await get_tree().create_timer(0.25).timeout
 					if tempButtons2[i] == 1:
@@ -103,8 +103,8 @@ func _process(delta: float) -> void:
 					$btns/click.play()
 					$btns/button2.set_cell(tempCells2[i], 0, Vector2i(0, 3))
 					$btns/button2.set_cell(tempLights2[i], 0, Vector2i(2, 1))
-#					$door2.set_cell(door[0], 0, Vector2i(1, 2))
-#					$door2.set_cell(door[1], 0, Vector2i(0, 2))
+					$door2.set_cell(door[0], 0, Vector2i(1, 2))
+					$door2.set_cell(door[1], 0, Vector2i(0, 2))
 					tempButtons2[i] = 0
 		
 		if "button_map" in level_data:
