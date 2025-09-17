@@ -21,7 +21,7 @@ func _ready() -> void:
 	set_collision_mask_value(1, true)
 	set_collision_mask_value(2, false)
 	set_collision_mask_value(3, true)
-	TurretSignal.connect("gotcha", _freeze())
+	#TurretSignal.connect("gotcha", _freeze())
 
 func _physics_process(delta: float) -> void:
 	if not dead:
@@ -36,15 +36,23 @@ func _physics_process(delta: float) -> void:
 			## Fix a minor glitch with turrets
 			#await get_tree().create_timer(0.05).timeout
 		
-		if str($IsInWall.get_overlapping_areas()).contains("water") \
-		or str($IsInWall.get_overlapping_areas()).contains("death_ray"):
+		if str($IsInWall.get_overlapping_areas()).contains("water"):
 			if really_dead == false:
-				velocity = Vector2.ZERO
+				#velocity = Vector2.ZERO
 				really_dead = true
 				dead = true
 				sprite.stop()
 				sprite.play(&"fade", 10)
 				await sprite.animation_finished
+				really_die()
+		elif str($PlayerArea.get_overlapping_areas()).contains("death_ray"):
+			#frozen = true
+			#print($PlayerArea.get_overlapping_areas())
+			var areas:Array = $PlayerArea.get_overlapping_areas()
+			#for i in areas:
+			if areas[0].get_parent().get_parent().type == 0:
+				really_dead = true
+				sprite.stop()
 				really_die()
 		elif sprite.animation == &"fade":
 			sprite.stop()
@@ -121,47 +129,48 @@ func _physics_process(delta: float) -> void:
 		#	dashDirection = -1
 		#elif -0.5 >= yDirection && yDirection >= -1:
 		#	dashDirection = 1
-		if direction or yDirection:
-			if direction < 0:
-				sprite.set_flip_h(1)
+		if !really_dead:
+			if direction or yDirection:
+				if direction < 0:
+					sprite.set_flip_h(1)
+				else:
+					sprite.set_flip_h(0)
+				#if Input.is_action_just_pressed("b") and dash == 0:
+				#	if dashDirection == 0.25:
+				#		velocity.x = -JUMP_VELOCITY
+				#		velocity.y = JUMP_VELOCITY
+				#	elif dashDirection == 0.5:
+				#		velocity.x = 1.25 * -JUMP_VELOCITY
+				#	elif dashDirection == 0.75:
+				#		velocity.x = -JUMP_VELOCITY
+				#		velocity.y = -JUMP_VELOCITY
+				#	elif dashDirection == 1:
+				#		velocity.y = 1.25 * -JUMP_VELOCITY
+				#	elif dashDirection == -0.25:
+				#		velocity.x = JUMP_VELOCITY
+				#		velocity.y = JUMP_VELOCITY
+				#	elif dashDirection == -0.5:
+				#		velocity.x = 1.25 * JUMP_VELOCITY
+				#	elif dashDirection == -0.75:
+				#		velocity.x = JUMP_VELOCITY
+				#		velocity.y = -JUMP_VELOCITY
+				#	elif dashDirection == -1:
+				#		velocity.y = 1.25 * JUMP_VELOCITY
+				#	sprite.play(&"dash", 0.6)
+				#	dash = 1
+				#	$sfx/dash.play()
+				#else:
+				velocity.x = direction * SPEED
+				if is_on_floor() and direction:
+					sprite.play(&"walk", 1.5)
+					if not $sfx/walk.is_playing():
+						$sfx/walk.play()
+					dash = 0
 			else:
-				sprite.set_flip_h(0)
-			#if Input.is_action_just_pressed("b") and dash == 0:
-			#	if dashDirection == 0.25:
-			#		velocity.x = -JUMP_VELOCITY
-			#		velocity.y = JUMP_VELOCITY
-			#	elif dashDirection == 0.5:
-			#		velocity.x = 1.25 * -JUMP_VELOCITY
-			#	elif dashDirection == 0.75:
-			#		velocity.x = -JUMP_VELOCITY
-			#		velocity.y = -JUMP_VELOCITY
-			#	elif dashDirection == 1:
-			#		velocity.y = 1.25 * -JUMP_VELOCITY
-			#	elif dashDirection == -0.25:
-			#		velocity.x = JUMP_VELOCITY
-			#		velocity.y = JUMP_VELOCITY
-			#	elif dashDirection == -0.5:
-			#		velocity.x = 1.25 * JUMP_VELOCITY
-			#	elif dashDirection == -0.75:
-			#		velocity.x = JUMP_VELOCITY
-			#		velocity.y = -JUMP_VELOCITY
-			#	elif dashDirection == -1:
-			#		velocity.y = 1.25 * JUMP_VELOCITY
-			#	sprite.play(&"dash", 0.6)
-			#	dash = 1
-			#	$sfx/dash.play()
-			#else:
-			velocity.x = direction * SPEED
-			if is_on_floor() and direction:
-				sprite.play(&"walk", 1.5)
-				if not $sfx/walk.is_playing():
-					$sfx/walk.play()
-				dash = 0
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			if sprite.animation == &"walk":
-				$sfx/walk.stop()
-				sprite.stop()
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+				if sprite.animation == &"walk":
+					$sfx/walk.stop()
+					sprite.stop()
 		if (not str($IsInWall.get_overlapping_areas()).contains("water")):
 		#or (not str($IsInWall.get_overlapping_areas().contains("death_ray"))):
 			move_and_slide()
@@ -178,12 +187,13 @@ func _physics_process(delta: float) -> void:
 	elif dead:
 		motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 		if str($PlayerArea.get_overlapping_areas()).contains("death_ray"):
-			frozen = true
+			#frozen = true
 			#print($PlayerArea.get_overlapping_areas())
-			#var areas:Array = $PlayerArea.get_overlapping_areas()
-			#if areas[0].get_parent().type == 1:
-				#frozen = true
-				#print("frozen")
+			var areas:Array = $PlayerArea.get_overlapping_areas()
+			#for i in areas:
+			if areas[0].get_parent().get_parent().type == 1:
+				frozen = true
+				print("frozen")
 		#else:
 			#frozen = false
 			#motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
@@ -282,6 +292,8 @@ func _on_timer_timeout() -> void:
 	if not str($IsInWall.get_overlapping_bodies()).contains("white"):
 		dead = false
 		in_wall = false
+		if not $sfx/live.playing:
+			$sfx/live.play()
 	else:
 		if not in_wall:
 			in_wall = true
@@ -290,12 +302,13 @@ func _on_timer_timeout() -> void:
 
 func really_die():
 	$"sfx/really-die".play()
-	$AnimatedSprite2D.play(&"really_die")
-	await $AnimatedSprite2D.animation_finished
+	sprite.stop()
+	sprite.play(&"really_die")
+	await sprite.animation_finished
 	main_node.load_game()
 	get_parent().queue_free()
 	self.queue_free()
 
 func _freeze():
-	frozen = true
-	#pass
+	#frozen = true
+	pass

@@ -7,7 +7,8 @@ extends CharacterBody2D
 
 func _physics_process(delta: float) -> void:
 	if player and player.really_dead:
-		await get_node(str(scene_root) + "/hud").on_transition_finished
+		if get_node(str(scene_root) + "/hud"):
+			await get_node(str(scene_root) + "/hud").on_transition_finished
 		get_parent().queue_free()
 		self.queue_free()
 	

@@ -37,14 +37,16 @@ func _ready():
 		$VisionCone2D.rotation = -89.5
 
 func _physics_process(delta):
-	if player.is_queued_for_deletion():
+	player = get_tree().get_first_node_in_group("Test Subject 234")
+	if !player or player.is_queued_for_deletion():
 		get_parent().queue_free()
 		self.queue_free()
 	
 	if player and player.really_dead \
 	and !scene_root.loading:
-		await get_node(str(scene_root) + "/hud").on_transition_finished
-		main_node.queue_free()
+		if get_node(str(scene_root) + "/hud"):
+			await get_node(str(scene_root) + "/hud").on_transition_finished
+			main_node.queue_free()
 	
 	if target != null:
 		angle_to_target = global_position.direction_to(target.global_position).angle()
@@ -63,7 +65,7 @@ func _physics_process(delta):
 		else:
 			correct_type = false
 	
-	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("PlayerArea") \
+	if str($VisionCone2D/Area2D.get_overlapping_areas()).contains("IsInWall") \
 	and not cube_blocking \
 	and correct_type:
 		if not zappy_played:
@@ -76,11 +78,11 @@ func _physics_process(delta):
 			$death_ray/living.visible = true
 			$death_ray/dead.visible = false
 			if target != null:
-				$death_ray/living.points[1].x = (0 + target.position.x) - 15
+				$death_ray/living.points[1].x = 500#(0 + target.global_position.x) - 60
 				#$death_ray/living.points[1].x = 500
 				$death_ray/living.global_rotation = angle_to_target
-				$death_ray/collider.shape.points[1].x = (0 + target.position.x)
-				$death_ray/collider.shape.points[2].x = (0 + target.position.x)
+				$death_ray/collider.polygon[1].x = 500#(0 + target.global_position.x) - 60
+				$death_ray/collider.polygon[2].x = 500#(0 + target.global_position.x) - 60
 				#$death_ray/collider.shape.points[1].x = 500
 				#$death_ray/collider.shape.points[2].x = 500
 				$death_ray/collider.global_rotation = angle_to_target
@@ -88,19 +90,19 @@ func _physics_process(delta):
 			$death_ray/living.visible = false
 			$death_ray/dead.visible = true
 			if target != null:
-				$death_ray/dead.points[1].x = (0 + target.position.x) - 15
-				#$death_ray/dead.points[1].x = 500
+				$death_ray/dead.points[1].x = 500#(0 + target.global_position.x) - 60
+				#$death_ray/living.points[1].x = 500
 				$death_ray/dead.global_rotation = angle_to_target
-				$death_ray/collider.shape.points[1].x = (0 + target.position.x)
-				$death_ray/collider.shape.points[2].x = (0 + target.position.x)
+				$death_ray/collider.polygon[1].x = 500#(0 + target.global_position.x) - 60
+				$death_ray/collider.polygon[2].x = 500#(0 + target.global_position.x) - 60
 				#$death_ray/collider.shape.points[1].x = 500
 				#$death_ray/collider.shape.points[2].x = 500
 				$death_ray/collider.global_rotation = angle_to_target
-				TurretSignal.emit("gotcha")
+				#TurretSignal.emit("gotcha")
 		#print("The player is visible")
 	else:
-		$death_ray/collider.shape.points[1].x = 0
-		$death_ray/collider.shape.points[2].x = 0
+		$death_ray/collider.polygon[1].x = 0
+		$death_ray/collider.polygon[2].x = 0
 		$death_ray/collider.visible = false
 		zappy_played = false
 		$VisionCone2D/Polygon2D.color = Color("#7c7c7c7a")
@@ -110,8 +112,9 @@ func _physics_process(delta):
 		$death_ray/collider.global_rotation = 0
 		#print("The player is not visible")
 	
-	if not is_on_floor():
+	if not is_on_floor() and main_node.gravity:
 		velocity += get_gravity() * delta
+	
 	if main_node.type == 0:
 		$AnimatedSprite2D.play(&"living")
 	elif main_node.type == 1:
