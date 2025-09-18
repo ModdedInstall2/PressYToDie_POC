@@ -36,11 +36,12 @@ func _physics_process(delta: float) -> void:
 			## Fix a minor glitch with turrets
 			#await get_tree().create_timer(0.05).timeout
 		
-		if str($IsInWall.get_overlapping_areas()).contains("water"):
+		if str($IsInWall.get_overlapping_areas()).contains("water") \
+		or Input.is_action_just_pressed("load"):
 			if really_dead == false:
 				#velocity = Vector2.ZERO
 				really_dead = true
-				dead = true
+				#dead = true
 				sprite.stop()
 				#sprite.play(&"fade", 10)
 				#await sprite.animation_finished
