@@ -44,7 +44,7 @@ Anyway, have fun, and please let me know what you think of it!
 Known Bugs​
 ---
 
-Whenever you start a new level, there's a small chance you will be unable to interact with objects. This goes away when you enter water or another form of death zone, so to assist in testing, a ModdedInstall2™ High-Volatility Emergency Death Zone™ has been added to the start of each level. Simply walk backwards once a level loads or you restart it and the level will reset, allowing you to complete it as normal! (And don't worry, I've made sure you can't abuse this to cheat levels.)
+Whenever you start a new level, there's a small chance you will be unable to interact with objects. This goes away when you enter water or another form of death zone, so to assist in testing, there's a restart button! Simply press R (keyboard) or Select (controller) once a level loads and the level will reset, allowing you to complete it as normal! (And don't worry, I've made sure you can't abuse this to cheat levels.)
 
 The turrets are kind of really, really bad at their job (especially the ones that shoot you when you're alive). I probably need to fire them. However, they're far too good at it when you jump on them at a precise angle - so... don't jump on them at a precise angle.
 
