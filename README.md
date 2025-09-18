@@ -1,4 +1,4 @@
-Please read this whole thing before downloading the game!!!_
+Please read this whole thing before downloading the game!!!
 --------------------------------------------------------------
 
 Press Y To Die (PROOF OF CONCEPT)​
