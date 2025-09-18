@@ -27,7 +27,7 @@ size = Vector2(12, 1.52618)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8cye3"]
 font = ExtResource("9_i2t4f")
-font_color = Color(0.13333334, 0.13725491, 0.13725491, 1)
+font_color = Color(0, 0, 0, 1)
 
 [node name="1" type="Node2D"]
 script = ExtResource("1_0b4ue")
