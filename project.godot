@@ -129,5 +129,5 @@ load={
 
 textures/canvas_textures/default_texture_filter=3
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.9411765, 0.9647059, 0.9411765, 1)
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)
 occlusion_culling/use_occlusion_culling=true
