@@ -41,7 +41,8 @@ There are also turrets, of which there are two kinds. One kind is designed to el
 
 Anyway, have fun, and please let me know what you think of it!
 
-### Known Bugs​
+Known Bugs​
+---
 
 Whenever you start a new level, there's a small chance you will be unable to interact with objects. This goes away when you enter water or another form of death zone, so to assist in testing, a ModdedInstall2™ High-Volatility Emergency Death Zone™ has been added to the start of each level. Simply walk backwards once a level loads or you restart it and the level will reset, allowing you to complete it as normal! (And don't worry, I've made sure you can't abuse this to cheat levels.)
 
