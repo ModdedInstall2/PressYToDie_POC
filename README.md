@@ -16,7 +16,8 @@ This game has basically been my dream to make for a very long time now, and here
 
 *  Hopefully a pretty fun time!​
 
-### How To Play
+How To Play
+-----------
 
 _All keybindings are for Xbox controllers. Other controllers have the same bindings based on where they are on the button pad. If you must play on a keyboard, it's R, Z, X, C, and Y, in that order._
 
