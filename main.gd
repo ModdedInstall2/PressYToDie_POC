@@ -4,7 +4,7 @@ extends Node2D
 # and instead loads whatever level is listed in "current_level",
 # because it was kind of important for me to test the game on
 # a per-level basis while I was rewriting the whole level system.
-var testing = false
+var testing = true
 var save := "user://ddm.sav"
 
 @export_range (0, 19) var current_level:int = 1
@@ -45,9 +45,10 @@ func _physics_process(delta: float) -> void:
 		load_game()
 		active = true
 	
-	if Input.is_action_just_pressed("load"):
-		loading = true
-		load_game()
+	# Moved this to the player's code so it's more stable
+	#if Input.is_action_just_pressed("load"):
+		#loading = true
+		#load_game()
 	
 	if str(%left.get_overlapping_areas()).contains("IsInWall"):
 		entered_from = 0

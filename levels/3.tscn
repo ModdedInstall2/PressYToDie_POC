@@ -28,7 +28,7 @@ size = Vector2(12, 1.52618)
 
 [sub_resource type="LabelSettings" id="LabelSettings_i2t4f"]
 font = ExtResource("9_i2t4f")
-font_color = Color(0, 0, 0, 1)
+font_color = Color(0.13333334, 0.13725491, 0.13725491, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hti2l"]
 size = Vector2(20, 2)
