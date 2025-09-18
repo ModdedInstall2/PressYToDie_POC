@@ -4,10 +4,10 @@ extends Node2D
 # and instead loads whatever level is listed in "current_level",
 # because it was kind of important for me to test the game on
 # a per-level basis while I was rewriting the whole level system.
-var testing = true
+var testing = false
 var save := "user://ddm.sav"
 
-@export_range (0, 19) var current_level:int = 17
+@export_range (0, 19) var current_level:int = 1
 @export_range (0, 2) var entered_from:int = 1
 
 #@onready var Level:Node = $level
@@ -72,10 +72,16 @@ func save_game():
 		print("Can't write save file")
 		return
 	
-	var save_file = FileAccess.open(save, FileAccess.WRITE)
-	var save_string = JSON.stringify({"level": current_level})
-	save_file.store_line(save_string)
-	loading = false
+	if current_level <= 18:
+		var save_file = FileAccess.open(save, FileAccess.WRITE)
+		var save_string = JSON.stringify({"level": current_level})
+		save_file.store_line(save_string)
+		loading = false
+	else:
+		var save_file = FileAccess.open(save, FileAccess.WRITE)
+		var save_string = JSON.stringify({"level": 1})
+		save_file.store_line(save_string)
+		loading = false
 	
 	# Old saving code from back when everything was still one map.
 	# This code really, *really* sucks, but it took ages to make.
@@ -89,25 +95,28 @@ func load_game():
 	await $hud.on_transition_finished
 	for i in %levels.get_child_count():
 		get_node("levels/" + str(%levels.get_child(i))).queue_free()
+	
 	if active:
 		if entered_from == 0:
 			current_level -= 1
 		elif entered_from == 2:
 			current_level += 1
 		
-		var new_level = load("res://levels/" + str(current_level) + ".tscn")
-		var instantized = new_level.instantiate()
-		instantized.name = str(current_level)
-		%levels.add_child(instantized)
-		#if get_node(str(current_level)):
-			#if str(get_node(str(current_level)).get_property_list()).contains("sprite_entered_from"):
-				#get_node(str(current_level)).sprite_entered_from = entered_from
-		#get_node(str(current_level)).queue_free()
-		#instantized = new_level.instantiate()
-		#add_child(instantized)
+		if current_level <= 18:
+			var new_level = load("res://levels/" + str(current_level) + ".tscn")
+			var instantized = new_level.instantiate()
+			instantized.name = str(current_level)
+			%levels.add_child(instantized)
+			#if get_node(str(current_level)):
+				#if str(get_node(str(current_level)).get_property_list()).contains("sprite_entered_from"):
+					#get_node(str(current_level)).sprite_entered_from = entered_from
+			#get_node(str(current_level)).queue_free()
+			#instantized = new_level.instantiate()
+			#add_child(instantized)
 		entered_from = 1
 		active = true
-		save_game()
+		if !testing:
+			save_game()
 		#load_game()
 		loading = false
 	elif !testing:
@@ -128,8 +137,7 @@ func load_game():
 				continue
 			
 			var load_data = json.data
-			@warning_ignore("shadowed_variable")
-			var current_level = load_data["level"]
+			current_level = load_data["level"]
 			var new_level = load("res://levels/" + str(current_level) + ".tscn")
 			var instantized  = new_level.instantiate()
 			instantized.name = str(current_level)

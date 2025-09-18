@@ -1,0 +1,231 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgjpq5ur1rsr8"]
+
+[ext_resource type="Script" uid="uid://cvuokvba0u4kx" path="res://credits.gd" id="1_c1t8d"]
+[ext_resource type="FontFile" uid="uid://o1im8dg24ckm" path="res://ui_assets/fonts/Kenney Pixel.ttf" id="1_nm7lk"]
+[ext_resource type="AudioStream" uid="uid://d1rtomfq1qmek" path="res://music/credits.ogg" id="3_g4wvt"]
+
+[sub_resource type="Theme" id="Theme_64ctp"]
+default_font = ExtResource("1_nm7lk")
+default_font_size = 48
+
+[node name="credits" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 473.0
+offset_bottom = 264.0
+script = ExtResource("1_c1t8d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(473, 264)
+layout_mode = 0
+offset_right = 473.0
+offset_bottom = 264.0
+color = Color(0, 0, 0, 1)
+
+[node name="text" type="CharacterBody2D" parent="."]
+position = Vector2(0, -6582)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="text"]
+custom_minimum_size = Vector2(473, 264)
+offset_top = 19.0
+offset_right = 473.0
+offset_bottom = 6854.0
+theme = SubResource("Theme_64ctp")
+bbcode_enabled = true
+text = "
+
+press y to die
+sage 2025 demo
+
+
+
+
+
+
+created by
+takashi sativa
+
+
+
+
+developed by
+takashi sativa
+
+
+
+
+all the spaghetti code
+fresh from olive garden 
+was written by
+takashi sativa
+
+
+
+
+code i [s]stole[/s] used
+whilst strictly adhering to
+the terms of their respective
+open source licenses was
+written by
+john ivess
+dorian bucur
+
+
+
+
+that's the mit license btw
+
+
+
+
+crappy pixel art by
+takashi sativa
+
+
+
+
+level design by
+takashi sativa
+starwarsfan9677
+
+
+
+
+if you're upset about 
+the lack of a story 
+you can blame
+takashi sativa
+
+
+
+
+same goes for the 
+lack of a boss fight
+
+
+
+playtesters
+takashi sativa
+thatoneguy
+emma-lyne
+lowell.douglas
+theblock094
+awesomeman63
+and plenty of other 
+people whose names 
+i forgot to ask
+
+
+
+qa by
+takashi sativa
+
+
+
+that explains why 
+there are so many 
+bugs, i guess
+
+
+
+oh yeah almost forgot
+
+
+
+all remaining bugs
+courtesy of
+takashi sativa
+
+
+
+(used) sound
+effect credits:
+jalastrum
+edgardedition
+8bitmyketison
+adamweeden
+chipfork71
+alaskarobotics
+and
+some random text 
+to speech app i 
+found on duckduckgo
+
+
+
+
+the song you're 
+currently hearing:
+
+\"still alive (chiptune cover)\" 
+by chiptuverse
+
+
+
+loosely inspired by
+portal
+© 2007 valve
+
+
+
+this is free software.
+
+and i mean that in both 
+ways - the source code 
+is open source, and the game 
+is free to download.
+
+if you paid money for this, 
+please let me know. 
+you were scammed!
+
+if you're considering 
+charging someone for this 
+as a joke, be warned.
+
+i don't have money. but what i 
+do have are a very 
+particular set of skills, honed 
+over a very long career.
+
+skills that make me a 
+nightmare for people like you.
+
+if you sell this game, 
+mark my words.
+
+i will find you.
+
+and i will make you 
+disappear.
+
+
+
+anyway, on that 
+happy note...
+
+
+
+made with <3 by
+takashi sativa
+
+
+
+created in
+godot engine
+
+
+
+thank you 
+for playing!!!
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="still_alive" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g4wvt")
+
+[node name="timer" type="Timer" parent="."]
+wait_time = 2.0

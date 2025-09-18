@@ -42,15 +42,18 @@ func _physics_process(delta: float) -> void:
 				really_dead = true
 				dead = true
 				sprite.stop()
-				sprite.play(&"fade", 10)
-				await sprite.animation_finished
+				#sprite.play(&"fade", 10)
+				#await sprite.animation_finished
 				really_die()
 		elif str($PlayerArea.get_overlapping_areas()).contains("death_ray"):
 			#frozen = true
 			#print($PlayerArea.get_overlapping_areas())
-			var areas:Array = $PlayerArea.get_overlapping_areas()
+			#var areas:Array = $PlayerArea.get_overlapping_areas()
 			#for i in areas:
-			if areas[0].get_parent().get_parent().type == 0:
+			#if areas[0].get_parent().get_parent().type == 0:
+			await get_tree().create_timer(0.05).timeout
+			if str($PlayerArea.get_overlapping_areas()).contains("death_ray") \
+			and really_dead == false:
 				really_dead = true
 				sprite.stop()
 				really_die()
@@ -247,6 +250,9 @@ func _physics_process(delta: float) -> void:
 		if (not str($IsInWall.get_overlapping_areas()).contains("water")):
 			move_and_slide()
 		
+		if frozen:
+			velocity.x = 0.0
+		
 		if really_dead == false:
 			ragdoll.visible = true
 			ragdoll.scale = Vector2(1, 1)
@@ -301,10 +307,13 @@ func _on_timer_timeout() -> void:
 		$DeathTimer.start(1.0)
 
 func really_die():
+	velocity = Vector2.ZERO
 	$"sfx/really-die".play()
 	sprite.stop()
 	sprite.play(&"really_die")
+	velocity = Vector2.ZERO
 	await sprite.animation_finished
+	velocity = Vector2.ZERO
 	main_node.load_game()
 	get_parent().queue_free()
 	self.queue_free()
