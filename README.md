@@ -8,13 +8,13 @@ This game has basically been my dream to make for a very long time now, and here
 
 ### Featuring:​
 
-\- 18 brain-bending levels
+*  18 brain-bending levels
 
-\- One of the most unique puzzle mechanics I know of
+*  One of the most unique puzzle mechanics I know of
 
-\- Glitches, wonky collision, and crummy physics galore
+*  Glitches, wonky collision, and crummy physics galore
 
-\- Hopefully a pretty fun time!​
+*  Hopefully a pretty fun time!​
 
 ### How To Play
 
